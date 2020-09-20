@@ -8,22 +8,57 @@ namespace AztecArmy.Units
     {
         #region Variables
         [Header("Game Management")]
-        bool selected;
+        protected bool selected;
+        public GameManager gm;
+        public GameObject unitWorldCanvas;
+        [SerializeField]
         [Header("Unit Metrics")]
-        int health;
+        protected int health, basicDamage, moveSpeed, attackRange;
         #endregion
         public void OnSelection()
         {
-            //set units menu to active
-            //selected = true
+            unitWorldCanvas.SetActive(true);
         }
-        public void Movement()
+        public void OnDeSelection()
         {
-
+            unitWorldCanvas.SetActive(false);
         }
-        public void BasicAttack(int damage, int range, Unit target)
+        public void SelectMovement()
         {
-
+            gm.selectionState = 1;
+        }
+        public void SelectAttack()
+        {
+            gm.selectionState = 2;
+        }
+        public void MoveToTile(Transform targetTile)
+        {
+            Vector3 movePosition = targetTile.position;
+            movePosition.y += 0.55f;
+            gameObject.transform.position = movePosition;
+            gm.selectionState = 0;
+            unitWorldCanvas.SetActive(false);
+        }
+        public void BasicAttack(Unit target)
+        {
+            target.health -= basicDamage;
+            gm.selectionState = 0;
+            unitWorldCanvas.SetActive(false);
+        }
+        protected void Start()
+        {
+            unitWorldCanvas = transform.GetChild(0).gameObject;
+            gm = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
+            //Testing
+            health = 6;
+            basicDamage = 2;
+        }
+        protected void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                SelectMovement();
+            }
         }
     }
 }
