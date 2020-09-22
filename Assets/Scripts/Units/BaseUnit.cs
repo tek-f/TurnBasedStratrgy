@@ -15,8 +15,11 @@ namespace AztecArmy.Units
         }
         public void SpawnUnit(Transform targetTile)
         {
-            GameObject spawnedUnit = Instantiate(unitToSpawn, targetTile.position, unitToSpawn.transform.rotation);
-            //spawnedUnit.GetComponent<Unit>().MoveToTile(targetTile);
+            //GameObject spawnedObject = Instantiate(unitToSpawn);
+            Unit spawnedUnit = Instantiate(unitToSpawn).GetComponent<Unit>();
+            spawnedUnit.teamID = teamID;
+            spawnedUnit.MoveToTile(targetTile);
+            active = false;
             unitToSpawn = null;
             gm.selectionState = 0;
         }

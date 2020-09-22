@@ -6,6 +6,11 @@ namespace AztecArmy.Units
 {
     public class RangedUnit : Unit
     {
+        public void PoisonAttack()
+        {
 
+            active = false;
+            unitWorldCanvas.SetActive(false);
+        }
     }
 }

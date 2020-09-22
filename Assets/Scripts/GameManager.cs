@@ -9,10 +9,59 @@ namespace AztecArmy.gameManager
     {
         public Unit selectedUnit;
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
+        public int currentTeam;
         Camera mainCamera;
+        public List<Unit> team1Units = new List<Unit>();
+        public List<Unit> team2Units = new List<Unit>();
+        public void EndTurn()
+        {
+            if(currentTeam == 1)
+            {
+                currentTeam = 2;
+            }
+            else
+            {
+                currentTeam = 1;
+            }
+
+            if(currentTeam == 1)
+            {
+                foreach (Unit unit in team1Units)
+                {
+                    unit.OnTurnStart();
+                }
+            }
+            else
+            {
+                foreach (Unit unit in team2Units)
+                {
+                    unit.OnTurnStart();
+                }
+            }
+        }
+        public void AddUnitToList(Unit unit, int team)
+        {
+            if (team == 1)
+            {
+                team1Units.Add(unit);
+            }
+            else if(team == 2)
+            {
+                team2Units.Add(unit);
+            }
+        }
         void Start()
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            currentTeam = Random.Range(1, 3);
+            foreach (Unit unit in team1Units)
+            {
+                unit.OnTurnStart();
+            }
+            foreach (Unit unit in team2Units)
+            {
+                unit.OnTurnStart();
+            }
         }
         void Update()
         {
@@ -25,7 +74,8 @@ namespace AztecArmy.gameManager
                         RaycastHit hit;
                         if (Physics.Raycast(ray, out hit))
                         {
-                            if (hit.transform.gameObject.GetComponent<Unit>() != null)
+                            Unit tempUnit = hit.transform.gameObject.GetComponent<Unit>();
+                            if (tempUnit != null && tempUnit.teamID == currentTeam && tempUnit.active)
                             {
                                 if (selectedUnit != null)
                                 {
@@ -38,7 +88,10 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetButtonDown("Cancel"))
                     {
-                        selectedUnit.OnDeSelection();
+                        if (selectedUnit != null)
+                        {
+                            selectedUnit.OnDeSelection();
+                        }
                         selectedUnit = null;
                     }
                     break;
@@ -85,11 +138,15 @@ namespace AztecArmy.gameManager
                         RaycastHit hit;
                         if (Physics.Raycast(ray, out hit))
                         {
-                            if (hit.transform.GetComponent<Tile>() != null)
+                            if (hit.transform.CompareTag("Tile"))
                             {
                                 selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit.transform);
                             }
                         }
+                    }
+                    if (Input.GetButtonDown("Cancel"))
+                    {
+                        selectionState = 0;
                     }
                     break;
                 default:
