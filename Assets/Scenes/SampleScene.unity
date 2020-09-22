@@ -770,9 +770,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2460,7 +2460,7 @@ GameObject:
   - component: {fileID: 454606890}
   - component: {fileID: 454606889}
   m_Layer: 0
-  m_Name: GameAdmin
+  m_Name: GameManager
   m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2747,7 +2747,7 @@ MonoBehaviour:
   basicDamage: 0
   moveSpeed: 0
   attackRange: 0
-  active: 0
+  active: 1
   moved: 0
   attacked: 0
   teamID: 2
@@ -4977,8 +4977,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -223.39, y: -130.08}
-  m_SizeDelta: {x: 61.32, y: 25.86}
+  m_AnchoredPosition: {x: -750, y: -450}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705426984
 MonoBehaviour:
@@ -8992,10 +8992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -13827,7 +13827,7 @@ MonoBehaviour:
   basicDamage: 0
   moveSpeed: 0
   attackRange: 0
-  active: 0
+  active: 1
   moved: 0
   attacked: 0
   teamID: 1
