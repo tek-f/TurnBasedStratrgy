@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using AztecArmy.gameManager;
 namespace AztecArmy.Units
 {
     public class Unit : MonoBehaviour
@@ -26,10 +26,12 @@ namespace AztecArmy.Units
         public void SelectMovement()
         {
             gm.selectionState = 1;
+            unitWorldCanvas.SetActive(false);
         }
         public void SelectAttack()
         {
             gm.selectionState = 2;
+            unitWorldCanvas.SetActive(false);
         }
         public void MoveToTile(Transform targetTile)
         {
@@ -37,13 +39,11 @@ namespace AztecArmy.Units
             movePosition.y += 0.55f;
             gameObject.transform.position = movePosition;
             gm.selectionState = 0;
-            unitWorldCanvas.SetActive(false);
         }
         public void BasicAttack(Unit target)
         {
             target.health -= basicDamage;
             gm.selectionState = 0;
-            unitWorldCanvas.SetActive(false);
         }
         protected void Start()
         {
@@ -52,13 +52,6 @@ namespace AztecArmy.Units
             //Testing
             health = 6;
             basicDamage = 2;
-        }
-        protected void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.M))
-            {
-                SelectMovement();
-            }
         }
     }
 }

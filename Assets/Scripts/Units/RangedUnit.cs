@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AztecArmy.Units
 {
-    public class BaseUnit : Unit
+    public class RangedUnit : Unit
     {
 
     }

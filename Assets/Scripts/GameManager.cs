@@ -3,90 +3,102 @@ using System.Collections.Generic;
 using UnityEngine;
 using AztecArmy.Units;
 
-
-public class GameManager : MonoBehaviour
+namespace AztecArmy.gameManager
 {
-    public Unit selectedUnit;
-    public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
-    [SerializeField]
-    LayerMask selectableLayer;
-
-    Camera mainCamera;
-
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-    }
-    void Update()
-    {
-        switch (selectionState)
+        public Unit selectedUnit;
+        public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
+        Camera mainCamera;
+        void Start()
         {
-            case 0://selecting units
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+            mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        }
+        void Update()
+        {
+            switch (selectionState)
+            {
+                case 0://selecting units
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        if (hit.transform.gameObject.GetComponent<Unit>() != null)
+                        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
                         {
-                            if (selectedUnit != null)
+                            if (hit.transform.gameObject.GetComponent<Unit>() != null)
                             {
-                                selectedUnit.OnDeSelection();
+                                if (selectedUnit != null)
+                                {
+                                    selectedUnit.OnDeSelection();
+                                }
+                                selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
+                                selectedUnit.OnSelection();
                             }
-                            selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
-                            selectedUnit.OnSelection();
                         }
                     }
-                }
-                if(Input.GetButtonDown("Cancel"))
-                {
-                    selectedUnit.OnDeSelection();
-                    selectedUnit = null;
-                }
-                break;
-            case 1://selecting movement
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+                    if (Input.GetButtonDown("Cancel"))
                     {
-                        if (hit.transform.gameObject.CompareTag("Tile") && selectedUnit != null)
-                        {
-                            selectedUnit.MoveToTile(hit.transform);
-                        }
+                        selectedUnit.OnDeSelection();
+                        selectedUnit = null;
                     }
-                }
-                if (Input.GetButtonDown("Cancel"))
-                {
-                    selectionState = 0;
-                }
-                break;
-            case 2://selecting attack target
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+                    break;
+                case 1://selecting movement
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        if (hit.transform.gameObject.GetComponent<Unit>() != null)
+                        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
                         {
-                            selectedUnit.BasicAttack(hit.transform.gameObject.GetComponent<Unit>());
+                            if (hit.transform.gameObject.CompareTag("Tile") && selectedUnit != null)
+                            {
+                                selectedUnit.MoveToTile(hit.transform);
+                            }
                         }
                     }
-                }
-                if (Input.GetButtonDown("Cancel"))
-                {
-                    selectionState = 0;
-                }
-                break;
-            default:
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Debug.LogError("Selection State Out of Range");
-                }
-                break;
+                    if (Input.GetButtonDown("Cancel"))
+                    {
+                        selectionState = 0;
+                    }
+                    break;
+                case 2://selecting attack target
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.gameObject.GetComponent<Unit>() != null)
+                            {
+                                selectedUnit.BasicAttack(hit.transform.gameObject.GetComponent<Unit>());
+                            }
+                        }
+                    }
+                    if (Input.GetButtonDown("Cancel"))
+                    {
+                        selectionState = 0;
+                    }
+                    break;
+                case 3://selecting target for spawn ability, specific to the base unit
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.GetComponent<Tile>() != null)
+                            {
+                                selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit.transform);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Debug.LogError("Selection State Out of Range");
+                    }
+                    break;
+            }
         }
     }
 }
