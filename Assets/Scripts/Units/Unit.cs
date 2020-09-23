@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AztecArmy.gameManager;
+using AztecArmy.gridManager;
 
 namespace AztecArmy.Units
 {
@@ -10,7 +11,7 @@ namespace AztecArmy.Units
         #region Variables
         [Header("Game Management")]
         public GameManager gm;
-        public GameObject unitWorldCanvas;
+        public GameObject unitWorldCanvas, moveButton, attackButton;
         [SerializeField]
         [Header("Unit Metrics")]
         protected int health, basicDamage, moveSpeed, attackRange;
@@ -22,9 +23,22 @@ namespace AztecArmy.Units
             active = true;
             moved = false;
             attacked = false;
+            moveButton.SetActive(true);
+            if (attackButton != null)
+            {
+                attackButton.SetActive(true);
+            }
         }
         public void OnSelection()
         {
+            if (moved)
+            {
+                moveButton.SetActive(false);
+            }
+            if (attacked && attackButton != null)
+            {
+                attackButton.SetActive(false);
+            }
             unitWorldCanvas.SetActive(true);
         }
         public void OnDeSelection()
@@ -41,17 +55,30 @@ namespace AztecArmy.Units
             gm.selectionState = 2;
             unitWorldCanvas.SetActive(false);
         }
+        public void Move(int x, int z)
+        {
+            var gridManager = GridManager.Instance;
+            var tile = gridManager.GetTile(x, z);
+            if (tile != null)
+            {
+                // Move Position to Tile
+                transform.position = tile.PivotPoint;
+                // Parent Unit to Tile
+                transform.SetParent(tile.transform);
+            }
+        }
         public void MoveToTile(Transform targetTile)
         {
             Vector3 movePosition = targetTile.position;
             movePosition.y += 0.55f;
             gameObject.transform.position = movePosition;
             moved = true;
-            if(moved && attacked)
+
+            if (moved && attacked)
             {
                 active = false;
             }
-            if(gm != null)
+            if (gm != null)
             {
                 gm.selectionState = 0;
             }

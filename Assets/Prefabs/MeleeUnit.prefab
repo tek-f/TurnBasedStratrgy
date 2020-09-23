@@ -521,6 +521,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
+  moveButton: {fileID: 2359674506504570527}
+  attackButton: {fileID: 2359674506220975212}
   health: 0
   basicDamage: 0
   moveSpeed: 0

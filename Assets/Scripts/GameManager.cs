@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AztecArmy.Units;
+using AztecArmy.gridManager;
 
 namespace AztecArmy.gameManager
 {
