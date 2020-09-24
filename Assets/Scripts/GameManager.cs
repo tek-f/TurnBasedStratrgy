@@ -8,12 +8,19 @@ namespace AztecArmy.gameManager
 {
     public class GameManager : MonoBehaviour
     {
+        #region Variables
+        #region Units
         public Unit selectedUnit;
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;
         Camera mainCamera;
         public List<Unit> team1Units = new List<Unit>();
         public List<Unit> team2Units = new List<Unit>();
+        #endregion
+        #region PathFinding
+
+        #endregion
+        #endregion
         public void EndTurn()
         {
             if(currentTeam == 1)
@@ -79,23 +86,24 @@ namespace AztecArmy.gameManager
                             if (tempUnit != null && tempUnit.teamID == currentTeam && tempUnit.active)
                             {
                                 if (selectedUnit != null)
-                                {
                                     selectedUnit.OnDeSelection();
-                                }
+
                                 selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
                                 selectedUnit.OnSelection();
                             }
                         }
                     }
+
                     if (Input.GetButtonDown("Cancel"))
                     {
                         if (selectedUnit != null)
-                        {
                             selectedUnit.OnDeSelection();
-                        }
+
                         selectedUnit = null;
                     }
+
                     break;
+
                 case 1://selecting movement
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -103,17 +111,19 @@ namespace AztecArmy.gameManager
                         RaycastHit hit;
                         if (Physics.Raycast(ray, out hit))
                         {
+
+
+
+                            //Old
                             if (hit.transform.gameObject.CompareTag("Tile") && selectedUnit != null)
-                            {
                                 selectedUnit.MoveToTile(hit.transform);
-                            }
                         }
                     }
                     if (Input.GetButtonDown("Cancel"))
-                    {
                         selectionState = 0;
-                    }
+
                     break;
+
                 case 2://selecting attack target
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -122,16 +132,14 @@ namespace AztecArmy.gameManager
                         if (Physics.Raycast(ray, out hit))
                         {
                             if (hit.transform.gameObject.GetComponent<Unit>() != null)
-                            {
                                 selectedUnit.BasicAttack(hit.transform.gameObject.GetComponent<Unit>());
-                            }
                         }
                     }
                     if (Input.GetButtonDown("Cancel"))
-                    {
                         selectionState = 0;
-                    }
+
                     break;
+
                 case 3://selecting target for spawn ability, specific to the base unit
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -140,21 +148,18 @@ namespace AztecArmy.gameManager
                         if (Physics.Raycast(ray, out hit))
                         {
                             if (hit.transform.CompareTag("Tile"))
-                            {
                                 selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit.transform);
-                            }
                         }
                     }
                     if (Input.GetButtonDown("Cancel"))
-                    {
                         selectionState = 0;
-                    }
+
                     break;
+
                 default:
                     if (Input.GetMouseButtonDown(0))
-                    {
                         Debug.LogError("Selection State Out of Range");
-                    }
+
                     break;
             }
         }

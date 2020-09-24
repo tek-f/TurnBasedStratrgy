@@ -6,7 +6,7 @@ namespace AztecArmy.gridManager
 {
     public class Tile : MonoBehaviour
     {
-        public Tile Parent = null;
+        public Tile previousTile = null;
         public int x, z;
         public float DistanceToTarget = 0f;
         public float Cost = 1f;

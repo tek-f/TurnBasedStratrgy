@@ -7,15 +7,13 @@ namespace AztecArmy.gridManager
 {
     public class GridManager : MonoBehaviour
     {
-        #region Singleton - https://refactoring.guru/design-patterns/singleton/csharp/example#:~:text=Singleton%20is%20a%20creational%20design,the%20modularity%20of%20your%20code.
-        // This makes the Class able to be accessed from ANYWHERE
+        #region Singleton
         public static GridManager Instance = null;
-        // NOTE: Try not to access 'Instance' from any 'Awake()' function in your project
         private void Awake()
         {
             if (Instance == null)
                 Instance = this;
-            else // Optional - Fail Safe for if other GridManagers Exist
+            else 
             {
                 Destroy(Instance.gameObject);
                 Instance = this;
@@ -25,7 +23,7 @@ namespace AztecArmy.gridManager
 
         public Tile m_prefab;
         public Tile[,] m_tiles;
-        public int m_width = 1, m_depth = 1;
+        public int gridWidth = 1, gridDepth = 1;
         public float m_spacing = 1f;
         public float m_rayDistance = 1000f;
         public float m_debugScale = .5f;
@@ -34,7 +32,7 @@ namespace AztecArmy.gridManager
         {
             GenerateTiles();
         }
-
+        //Temp Methods VVV
         Tile GetTile(Vector3 point, float radius)
         {
             var colliders = Physics.OverlapSphere(point, radius);
@@ -50,16 +48,14 @@ namespace AztecArmy.gridManager
         }
         Tile GetTile(Ray ray)
         {
-            Tile tile = null;
-            // Perform Raycast from Mouse Ray
+            Tile tile = null;//temp tile
             if (Physics.Raycast(ray, out var hit, m_rayDistance))
             {
-                // Try getting Tile component from the thing we hit
                 tile = hit.collider.GetComponent<Tile>();
             }
-            return tile;
+            return tile;//return tile that was hit
         }
-
+        //Temp Methods  ^^^^
         void OnDrawGizmos()
         {
             if (m_tiles == null)
@@ -104,13 +100,13 @@ namespace AztecArmy.gridManager
         }
         void GenerateTiles()
         {
-            m_tiles = new Tile[m_width, m_depth];
-            var halfWidth = m_width * .5f;
-            var halfDepth = m_depth * .5f;
+            m_tiles = new Tile[gridWidth, gridDepth];
+            var halfWidth = gridWidth * .5f;
+            var halfDepth = gridDepth * .5f;
             var pivot = new Vector3(0.5f, 0f, 0.5f);
-            for (int x = 0; x < m_width; x++)
+            for (int x = 0; x < gridWidth; x++)
             {
-                for (int z = 0; z < m_depth; z++)
+                for (int z = 0; z < gridDepth; z++)
                 {
                     var position = new Vector3(x - halfWidth, 0f, z - halfDepth);
                     position += pivot;
@@ -132,7 +128,7 @@ namespace AztecArmy.gridManager
 
         public Tile GetTile(int x, int z)
         {
-            if (x < 0 || x > m_width || z < 0 || z > m_depth)
+            if (x < 0 || x > gridWidth || z < 0 || z > gridDepth)
             {
                 return null; // Out of Range!
             }
@@ -145,28 +141,28 @@ namespace AztecArmy.gridManager
             List<Tile> Path = new List<Tile>();
             List<Tile> OpenList = new List<Tile>();
             List<Tile> ClosedList = new List<Tile>();
-            List<Tile> adjacencies;
+            List<Tile> adjacentTiles;
             Tile current = start;
 
             // add start Tile to Open List
             OpenList.Add(start);
-
             while (OpenList.Count != 0 && !ClosedList.Exists(x => x.x == end.x && x.z == end.z))
             {
                 current = OpenList[0];
                 OpenList.Remove(current);
                 ClosedList.Add(current);
-                adjacencies = GetAdjacentTiles(current);
-                foreach (Tile n in adjacencies)
+                adjacentTiles = GetAdjacentTiles(current);
+
+                foreach (Tile tile in adjacentTiles)
                 {
-                    if (!ClosedList.Contains(n) && !n.IsOccupied)
+                    if (!ClosedList.Contains(tile) && !tile.IsOccupied)
                     {
-                        if (!OpenList.Contains(n))
+                        if (!OpenList.Contains(tile))
                         {
-                            n.Parent = current;
-                            n.DistanceToTarget = Mathf.Abs(n.x - end.x) + Mathf.Abs(n.z - end.z);
-                            n.Cost = n.Weight + n.Parent.Cost;
-                            OpenList.Add(n);
+                            tile.previousTile = current;
+                            tile.DistanceToTarget = Mathf.Abs(tile.x - end.x) + Mathf.Abs(tile.z - end.z);
+                            tile.Cost = tile.Weight + tile.previousTile.Cost;
+                            OpenList.Add(tile);
                             OpenList = OpenList.OrderBy(Tile => Tile.F).ToList<Tile>();
                         }
                     }
@@ -175,18 +171,18 @@ namespace AztecArmy.gridManager
 
             // construct path, if end was not closed return null
             if (!ClosedList.Exists(x => x.x == end.x && x.z == end.z))
-            {
                 return null;
-            }
 
             Tile temp = ClosedList[ClosedList.IndexOf(current)];
-            if (temp == null) return null;
+            if (temp == null)
+                return null;
             do
             {
                 Path.Add(temp);
-                temp = temp.Parent;
-            } 
+                temp = temp.previousTile;
+            }
             while (temp != start && temp != null);
+
             return Path;
         }
 
@@ -194,17 +190,17 @@ namespace AztecArmy.gridManager
         {
             List<Tile> temp = new List<Tile>();
 
-            int col = (int)n.x;
-            int row = (int)n.z;
+            int col = n.x;
+            int row = n.z;
 
-            if (row + 1 < m_depth) 
+            if (row + 1 < gridDepth)
                 temp.Add(m_tiles[col, row + 1]);
             if (row - 1 >= 0) 
                 temp.Add(m_tiles[col, row - 1]);
+            if (col + 1 < gridWidth) 
+                temp.Add(m_tiles[col + 1, row]);
             if (col - 1 >= 0) 
                 temp.Add(m_tiles[col - 1, row]);
-            if (col + 1 < m_width) 
-                temp.Add(m_tiles[col + 1, row]);
 
             return temp;
         }

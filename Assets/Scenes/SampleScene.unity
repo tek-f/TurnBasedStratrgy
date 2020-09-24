@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -701,8 +701,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_prefab: {fileID: 894620568512539488, guid: dc89510ebcd30a24f9cfc8c6ef028785, type: 3}
-  m_width: 10
-  m_depth: 10
+  gridWidth: 10
+  gridDepth: 10
   m_spacing: 1
   m_rayDistance: 1000
   m_debugScale: 0.5
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2222,7 +2222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2335,7 +2335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2448,7 +2448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2561,7 +2561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2674,7 +2674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2787,7 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -2900,7 +2900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3190,7 +3190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3303,7 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3416,7 +3416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3529,7 +3529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3642,7 +3642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -3755,7 +3755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4236,7 +4236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4349,7 +4349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4462,7 +4462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4575,7 +4575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4765,7 +4765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4878,7 +4878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -4991,7 +4991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5104,7 +5104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5217,7 +5217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5330,7 +5330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5443,7 +5443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5556,7 +5556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6116,7 +6116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6229,7 +6229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6342,7 +6342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6455,7 +6455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6681,7 +6681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6794,7 +6794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -6907,7 +6907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7020,7 +7020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7133,7 +7133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7246,7 +7246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7359,7 +7359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7472,7 +7472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7668,7 +7668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -7781,7 +7781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8094,7 +8094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8207,7 +8207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8320,7 +8320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8433,7 +8433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8546,7 +8546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8659,7 +8659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8778,7 +8778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -8891,7 +8891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9004,7 +9004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9117,7 +9117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9230,7 +9230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9420,7 +9420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9533,7 +9533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9745,7 +9745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9858,7 +9858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -9971,7 +9971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10084,7 +10084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10197,7 +10197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10310,7 +10310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10423,7 +10423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10536,7 +10536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10844,7 +10844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -10957,7 +10957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11070,7 +11070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11183,7 +11183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11296,7 +11296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11409,7 +11409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11522,7 +11522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11635,7 +11635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11748,7 +11748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11861,7 +11861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -11974,7 +11974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12087,7 +12087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12200,7 +12200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12507,7 +12507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12620,7 +12620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12733,7 +12733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12846,7 +12846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -12959,7 +12959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13149,7 +13149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13262,7 +13262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13375,7 +13375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13488,7 +13488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13601,7 +13601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13714,7 +13714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13827,7 +13827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -13940,7 +13940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0
@@ -14344,7 +14344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b8b73f1ec24040981944b5b76c7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
+  previousTile: {fileID: 0}
   x: 0
   z: 0
   DistanceToTarget: 0

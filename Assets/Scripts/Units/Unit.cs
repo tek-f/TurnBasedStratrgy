@@ -67,6 +67,10 @@ namespace AztecArmy.Units
                 transform.SetParent(tile.transform);
             }
         }
+        public void CheckMovement()
+        {
+
+        }
         public void MoveToTile(Transform targetTile)
         {
             Vector3 movePosition = targetTile.position;
