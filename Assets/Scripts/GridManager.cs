@@ -79,6 +79,7 @@ namespace AztecArmy.gridManager
                 endTile = mouseTile;
             }
 
+            #region Manny Pathfinding Demo
             //VERY TEMPORARY!!! -Manny
             var startTile = GetTile(Vector3.zero, .5f);
 
@@ -99,6 +100,7 @@ namespace AztecArmy.gridManager
                     }
                 }
             }
+            #endregion
         }
         void GenerateTiles()
         {
@@ -125,9 +127,6 @@ namespace AztecArmy.gridManager
         {
             var instance = Instantiate(m_prefab.gameObject, position, Quaternion.identity, transform);
             var tile = instance.GetComponent<Tile>();
-            //tile.Weight = 1;
-            //tile.Parent = ;
-            //tile.Cost = ;
             return tile;
         }
 
@@ -158,8 +157,6 @@ namespace AztecArmy.gridManager
                 OpenList.Remove(current);
                 ClosedList.Add(current);
                 adjacencies = GetAdjacentTiles(current);
-
-
                 foreach (Tile n in adjacencies)
                 {
                     if (!ClosedList.Contains(n) && !n.IsOccupied)
@@ -182,14 +179,14 @@ namespace AztecArmy.gridManager
                 return null;
             }
 
-            // if all good, return path
             Tile temp = ClosedList[ClosedList.IndexOf(current)];
             if (temp == null) return null;
             do
             {
                 Path.Add(temp);
                 temp = temp.Parent;
-            } while (temp != start && temp != null);
+            } 
+            while (temp != start && temp != null);
             return Path;
         }
 
