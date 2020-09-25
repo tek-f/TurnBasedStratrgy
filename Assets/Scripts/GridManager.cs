@@ -58,6 +58,7 @@ namespace AztecArmy.gridManager
         //Temp Methods  ^^^^
         void OnDrawGizmos()
         {
+            /*
             if (m_tiles == null)
                 return;
             Gizmos.color = Color.red;
@@ -97,6 +98,7 @@ namespace AztecArmy.gridManager
                 }
             }
             #endregion
+            */
         }
         void GenerateTiles()
         {

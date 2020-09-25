@@ -14,7 +14,7 @@ namespace AztecArmy.Units
         public GameObject unitWorldCanvas, moveButton, attackButton;
         [SerializeField]
         [Header("Unit Metrics")]
-        protected int health, basicDamage, moveSpeed, attackRange;
+        public int health, basicDamage, moveSpeed, attackRange;
         public bool active, moved, attacked;
         public int teamID;
         #endregion
@@ -55,9 +55,8 @@ namespace AztecArmy.Units
             gm.selectionState = 2;
             unitWorldCanvas.SetActive(false);
         }
-        public void Move(int x, int z)
+        public void MoveToGridSpace(GridManager gridManager,int x, int z)
         {
-            var gridManager = GridManager.Instance;
             var tile = gridManager.GetTile(x, z);
             if (tile != null)
             {
@@ -71,7 +70,7 @@ namespace AztecArmy.Units
         {
 
         }
-        public void MoveToTile(Transform targetTile)
+        public void MoveToPosition(Transform targetTile)
         {
             Vector3 movePosition = targetTile.position;
             movePosition.y += 0.55f;

@@ -18,7 +18,7 @@ namespace AztecArmy.gameManager
         public List<Unit> team2Units = new List<Unit>();
         #endregion
         #region PathFinding
-
+        GridManager gridManager;
         #endregion
         #endregion
         public void EndTurn()
@@ -62,6 +62,7 @@ namespace AztecArmy.gameManager
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             currentTeam = Random.Range(1, 3);
+            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
             foreach (Unit unit in team1Units)
             {
                 unit.OnTurnStart();
@@ -105,23 +106,38 @@ namespace AztecArmy.gameManager
                     break;
 
                 case 1://selecting movement
+                    Ray ray1 = mainCamera.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit1;
+                    Tile currentTile = null;
+                    List<Tile> path = new List<Tile>();
+                    if (Physics.Raycast(ray1, out hit1))
+                    {
+                        currentTile = hit1.transform.GetComponent<Tile>();
+                        path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
+                    }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit))
-                        {
-
-
-
-                            //Old
-                            if (hit.transform.gameObject.CompareTag("Tile") && selectedUnit != null)
-                                selectedUnit.MoveToTile(hit.transform);
-                        }
+                        if(selectedUnit.moveSpeed < path.Count)
+                        selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
                     }
+                    /*
+                   if (Input.GetMouseButtonDown(0))
+                   {
+                       Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                       RaycastHit hit;
+                       if (Physics.Raycast(ray, out hit))
+                       {
+
+
+
+                           //Old
+                           if (hit.transform.gameObject.CompareTag("Tile") && selectedUnit != null)
+                               selectedUnit.MoveToTile(hit.transform);
+                       }
+                   }
+                   */
                     if (Input.GetButtonDown("Cancel"))
                         selectionState = 0;
-
                     break;
 
                 case 2://selecting attack target
