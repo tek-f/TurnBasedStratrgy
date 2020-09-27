@@ -112,12 +112,15 @@ namespace AztecArmy.gameManager
                     List<Tile> path = new List<Tile>();
                     if (Physics.Raycast(ray1, out hit1))
                     {
-                        currentTile = hit1.transform.GetComponent<Tile>();
-                        path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
+                        if(hit1.transform.GetComponent<Tile>() != null)
+                        {
+                            currentTile = hit1.transform.GetComponent<Tile>();
+                            path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
+                        }
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if(selectedUnit.moveSpeed < path.Count)
+                        if(currentTile != null && selectedUnit.moveSpeed < path.Count)
                         selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
                     }
                     /*
