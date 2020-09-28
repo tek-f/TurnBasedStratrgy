@@ -20,6 +20,7 @@ namespace AztecArmy.Units
             //GameObject spawnedObject = Instantiate(unitToSpawn);
             Tile tile = targetTile.GetComponent<Tile>();
             Unit spawnedUnit = Instantiate(unitToSpawn).GetComponent<Unit>();
+            spawnedUnit.transform.SetParent(tile.transform.parent);
             spawnedUnit.teamID = teamID;
             spawnedUnit.MoveToGridSpace(gridManager, tile.x, tile.z);
             active = false;

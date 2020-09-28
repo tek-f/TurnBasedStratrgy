@@ -74,11 +74,12 @@ namespace AztecArmy.Units
                 gameManager.selectionState = 0;
             }
         }
-        public void SetInitialPosition()
+        public void SetGridPosition()
         {
             RaycastHit hit;
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit))
+            if(Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 5f))
             {
+                Debug.Log("Raycast has been cast");
                 if(hit.transform.GetComponent<Tile>() != null)
                 {
                     gameObject.transform.SetParent(hit.transform);

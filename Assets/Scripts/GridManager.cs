@@ -30,7 +30,7 @@ namespace AztecArmy.gridManager
 
         void Start()
         {
-            GenerateTiles();
+            //GenerateTiles();
         }
         //Temp Methods VVV
         Tile GetTile(Vector3 point, float radius)
@@ -100,7 +100,7 @@ namespace AztecArmy.gridManager
             #endregion
             */
         }
-        void GenerateTiles()
+        public void GenerateTiles()
         {
             m_tiles = new Tile[gridWidth, gridDepth];
             var halfWidth = gridWidth * .5f;

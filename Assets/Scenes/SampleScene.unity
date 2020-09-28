@@ -3068,6 +3068,7 @@ MonoBehaviour:
   selectedUnit: {fileID: 0}
   selectionState: 0
   currentTeam: 0
+  numberOfTeams: 0
   team1Units: []
   team2Units: []
 --- !u!4 &454606890
@@ -5712,7 +5713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -750, y: -450}
+  m_AnchoredPosition: {x: -821.9, y: -473.9}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705426984
@@ -7820,7 +7821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ed14db4a65d7348a205f7bc61a3a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
+  gameManager: {fileID: 0}
+  gridManager: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
   moveButton: {fileID: 51524180}
   attackButton: {fileID: 0}
@@ -14045,7 +14047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ed14db4a65d7348a205f7bc61a3a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
+  gameManager: {fileID: 0}
+  gridManager: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
   moveButton: {fileID: 450026017}
   attackButton: {fileID: 0}

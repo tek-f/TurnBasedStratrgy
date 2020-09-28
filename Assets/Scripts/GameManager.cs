@@ -14,7 +14,8 @@ namespace AztecArmy.gameManager
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;
         Camera mainCamera;
-
+        public List<List<Unit>> teamList = new List<List<Unit>>();
+        public int numberOfTeams;
         public List<Unit> team1Units = new List<Unit>();
         public List<Unit> team2Units = new List<Unit>();
         #endregion
@@ -64,15 +65,16 @@ namespace AztecArmy.gameManager
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             currentTeam = Random.Range(1, 3);
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
+            gridManager.GenerateTiles();
             foreach (Unit unit in team1Units)
             {
                 unit.OnTurnStart();
-                unit.SetInitialPosition();
+                unit.SetGridPosition();
             }
             foreach (Unit unit in team2Units)
             {
                 unit.OnTurnStart();
-                unit.SetInitialPosition();
+                unit.SetGridPosition();
             }
         }
         void Update()
@@ -97,7 +99,6 @@ namespace AztecArmy.gameManager
                             }
                         }
                     }
-
                     if (Input.GetButtonDown("Cancel"))
                     {
                         if (selectedUnit != null)
@@ -105,9 +106,7 @@ namespace AztecArmy.gameManager
 
                         selectedUnit = null;
                     }
-
                     break;
-
                 case 1://selecting movement
                     Ray ray1 = mainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit1;
