@@ -10,7 +10,8 @@ namespace AztecArmy.Units
     {
         #region Variables
         [Header("Game Management")]
-        public GameManager gm;
+        public GameManager gameManager;
+        public GridManager gridManager;
         public GameObject unitWorldCanvas, moveButton, attackButton;
         [SerializeField]
         [Header("Unit Metrics")]
@@ -47,12 +48,12 @@ namespace AztecArmy.Units
         }
         public void SelectMovement()
         {
-            gm.selectionState = 1;
+            gameManager.selectionState = 1;
             unitWorldCanvas.SetActive(false);
         }
         public void SelectAttack()
         {
-            gm.selectionState = 2;
+            gameManager.selectionState = 2;
             unitWorldCanvas.SetActive(false);
         }
         public void MoveToGridSpace(GridManager gridManager,int x, int z)
@@ -60,15 +61,34 @@ namespace AztecArmy.Units
             var tile = gridManager.GetTile(x, z);
             if (tile != null)
             {
-                // Move Position to Tile
                 transform.position = tile.PivotPoint;
-                // Parent Unit to Tile
                 transform.SetParent(tile.transform);
+                moved = true;
+            }
+            if (moved && attacked)
+            {
+                active = false;
+            }
+            if (gameManager != null)
+            {
+                gameManager.selectionState = 0;
             }
         }
-        public void CheckMovement()
+        public void SetInitialPosition()
         {
-
+            RaycastHit hit;
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit))
+            {
+                if(hit.transform.GetComponent<Tile>() != null)
+                {
+                    gameObject.transform.SetParent(hit.transform);
+                    Debug.Log("Parent set: " + gameObject.transform.parent.name);
+                }
+            }
+            else
+            {
+                Debug.Log("no parent found");
+            }
         }
         public void MoveToPosition(Transform targetTile)
         {
@@ -81,9 +101,9 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
-            if (gm != null)
+            if (gameManager != null)
             {
-                gm.selectionState = 0;
+                gameManager.selectionState = 0;
             }
         }
         public void BasicAttack(Unit target)
@@ -94,13 +114,13 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
-            gm.selectionState = 0;
+            gameManager.selectionState = 0;
         }
-        protected void Start()
+        protected virtual void Start()
         {
             unitWorldCanvas = transform.GetChild(0).gameObject;
-            gm = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
-            gm.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
+            gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
+            gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
 
             //Testing
             health = 6;

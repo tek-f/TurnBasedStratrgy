@@ -120,14 +120,12 @@ namespace AztecArmy.gridManager
                 }
             }
         }
-
         Tile SpawnTile(Vector3 position)
         {
             var instance = Instantiate(m_prefab.gameObject, position, Quaternion.identity, transform);
             var tile = instance.GetComponent<Tile>();
             return tile;
         }
-
         public Tile GetTile(int x, int z)
         {
             if (x < 0 || x > gridWidth || z < 0 || z > gridDepth)
@@ -136,7 +134,6 @@ namespace AztecArmy.gridManager
             }
             return m_tiles[x, z];
         }
-
         #region PathFinding
         public List<Tile> FindPath(Tile start, Tile end)
         {
@@ -187,7 +184,6 @@ namespace AztecArmy.gridManager
 
             return Path;
         }
-
         private List<Tile> GetAdjacentTiles(Tile n)
         {
             List<Tile> temp = new List<Tile>();

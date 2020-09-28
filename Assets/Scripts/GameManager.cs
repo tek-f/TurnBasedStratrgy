@@ -14,6 +14,7 @@ namespace AztecArmy.gameManager
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;
         Camera mainCamera;
+
         public List<Unit> team1Units = new List<Unit>();
         public List<Unit> team2Units = new List<Unit>();
         #endregion
@@ -66,10 +67,12 @@ namespace AztecArmy.gameManager
             foreach (Unit unit in team1Units)
             {
                 unit.OnTurnStart();
+                unit.SetInitialPosition();
             }
             foreach (Unit unit in team2Units)
             {
                 unit.OnTurnStart();
+                unit.SetInitialPosition();
             }
         }
         void Update()
@@ -118,10 +121,12 @@ namespace AztecArmy.gameManager
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
                         }
                     }
-                    if (Input.GetMouseButtonDown(0))
+                    if(path.Count > 0 && currentTile != null)
                     {
-                        if(currentTile != null && selectedUnit.moveSpeed < path.Count)
-                        selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
+                        if(Input.GetMouseButtonDown(0))
+                        {
+                            selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
+                        }
                     }
                     /*
                    if (Input.GetMouseButtonDown(0))
@@ -156,7 +161,6 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetButtonDown("Cancel"))
                         selectionState = 0;
-
                     break;
 
                 case 3://selecting target for spawn ability, specific to the base unit

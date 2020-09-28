@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AztecArmy.gameManager;
+using AztecArmy.gridManager;
 
 namespace AztecArmy.Units
 {
@@ -11,17 +13,24 @@ namespace AztecArmy.Units
         public void SpawnUnitSelection(int unitType)
         {
             unitToSpawn = unitPrefabs[unitType];
-            gm.selectionState = 3;
+            gameManager.selectionState = 3;
         }
         public void SpawnUnit(Transform targetTile)
         {
             //GameObject spawnedObject = Instantiate(unitToSpawn);
+            Tile tile = targetTile.GetComponent<Tile>();
             Unit spawnedUnit = Instantiate(unitToSpawn).GetComponent<Unit>();
             spawnedUnit.teamID = teamID;
-            spawnedUnit.MoveToPosition(targetTile);
+            spawnedUnit.MoveToGridSpace(gridManager, tile.x, tile.z);
             active = false;
             unitToSpawn = null;
-            gm.selectionState = 0;
+            gameManager.selectionState = 0;
+        }
+        protected override void Start()
+        {
+            base.Start();
+            //TESTING
+
         }
     }
 }
