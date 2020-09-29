@@ -12,12 +12,14 @@ namespace AztecArmy.gameManager
         #region Units
         public Unit selectedUnit;
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
-        public int currentTeam;
+        public int currentTeam;//used to track which team is active, i.e. which team's turn it is
         Camera mainCamera;
+        [SerializeField]
         public List<List<Unit>> teamList = new List<List<Unit>>();
         public int numberOfTeams;
         public List<Unit> team1Units = new List<Unit>();
         public List<Unit> team2Units = new List<Unit>();
+        public GameObject baseUnitPrefab;
         #endregion
         #region PathFinding
         GridManager gridManager;
@@ -25,21 +27,23 @@ namespace AztecArmy.gameManager
         #endregion
         public void EndTurn()
         {
-            if(currentTeam == 1)
-            {
-                currentTeam = 2;
-            }
-            else
+            if(currentTeam == numberOfTeams)
             {
                 currentTeam = 1;
             }
-
-            if(currentTeam == 1)
+            else
             {
-                foreach (Unit unit in team1Units)
-                {
-                    unit.OnTurnStart();
-                }
+                currentTeam++;
+            }
+
+            foreach (Unit unit in teamList[currentTeam - 1])
+            {
+                unit.OnTurnStart();
+            }
+
+            /*if(currentTeam == 1)
+            {
+
             }
             else
             {
@@ -47,10 +51,16 @@ namespace AztecArmy.gameManager
                 {
                     unit.OnTurnStart();
                 }
-            }
+            }*/
         }
         public void AddUnitToList(Unit unit, int team)
         {
+            //reference to team to be added to
+            //reference to the unit to be added
+            //Add referenced unit to referenced team
+            //Put on unit instead?
+
+
             if (team == 1)
             {
                 team1Units.Add(unit);
@@ -63,10 +73,45 @@ namespace AztecArmy.gameManager
         void Start()
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-            currentTeam = Random.Range(1, 3);
+
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
             gridManager.GenerateTiles();
-            foreach (Unit unit in team1Units)
+
+            Debug.Log(gridManager.m_tiles.Length);
+
+            //get number of teams
+            //create
+
+
+            for (int i = 0; i < numberOfTeams; i++)
+            {
+                teamList.Add(new List<Unit>());
+                //Instantiate prefab of base unit
+                Unit baseUnit = Instantiate(baseUnitPrefab).GetComponent<Unit>();
+                //Set team ID
+                baseUnit.teamID = i + 1;
+                //Add base unit to team list
+                teamList[i].Add(baseUnit);
+                //Set up base Unit
+                teamList[i][0].OnUnitSpawn();
+            }
+            Debug.Log(teamList[0][0].gameObject.name);
+            Debug.Log(teamList[1][0].gameObject.name);
+
+            /*foreach (List<Unit> team in teamList)
+            {
+                //Instantiate prefab of base unit
+                GameObject baseUnit = Instantiate(baseUnitPrefab);
+                //Add base unit to team list
+                team.Add(baseUnit.GetComponent<Unit>());
+                team[0].OnUnitSpawn();
+            }*/
+
+            //TEMP Team base setup, will need to be changed to allow for more than two teams
+
+            currentTeam = Random.Range(1, numberOfTeams + 1);
+
+            /*foreach (Unit unit in team1Units)
             {
                 unit.OnTurnStart();
                 unit.SetGridPosition();
@@ -75,7 +120,8 @@ namespace AztecArmy.gameManager
             {
                 unit.OnTurnStart();
                 unit.SetGridPosition();
-            }
+            }*/
+
         }
         void Update()
         {
@@ -120,10 +166,11 @@ namespace AztecArmy.gameManager
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
                         }
                     }
-                    if(path.Count > 0 && currentTile != null)
+                    if(Input.GetMouseButtonDown(0))
                     {
-                        if(Input.GetMouseButtonDown(0))
+                        if (path.Count > 0 /*&& path.Count <= selectedUnit.moveSpeed */&& currentTile != null)
                         {
+                            Debug.Log("move attempted");
                             selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
                         }
                     }

@@ -55,7 +55,6 @@ namespace AztecArmy.gridManager
             }
             return tile;//return tile that was hit
         }
-        //Temp Methods  ^^^^
         void OnDrawGizmos()
         {
             /*
@@ -100,6 +99,7 @@ namespace AztecArmy.gridManager
             #endregion
             */
         }
+        //Temp Methods  ^^^^
         public void GenerateTiles()
         {
             m_tiles = new Tile[gridWidth, gridDepth];

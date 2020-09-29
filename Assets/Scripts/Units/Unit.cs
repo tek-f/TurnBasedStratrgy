@@ -19,6 +19,15 @@ namespace AztecArmy.Units
         public bool active, moved, attacked;
         public int teamID;
         #endregion
+        public void OnUnitSpawn()
+        {
+            unitWorldCanvas = transform.GetChild(0).gameObject;
+            gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
+            //gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
+            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
+            //SetGridPosition();
+            Debug.Log("Set up complete");
+        }
         public void OnTurnStart()
         {
             active = true;
@@ -58,7 +67,7 @@ namespace AztecArmy.Units
         }
         public void MoveToGridSpace(GridManager gridManager,int x, int z)
         {
-            var tile = gridManager.GetTile(x, z);
+            Tile tile = gridManager.GetTile(x, z);
             if (tile != null)
             {
                 transform.position = tile.PivotPoint;
@@ -76,6 +85,7 @@ namespace AztecArmy.Units
         }
         public void SetGridPosition()
         {
+            Debug.Log("called");
             RaycastHit hit;
             if(Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 5f))
             {
@@ -91,7 +101,7 @@ namespace AztecArmy.Units
                 Debug.Log("no parent found");
             }
         }
-        public void MoveToPosition(Transform targetTile)
+        /*public void MoveToPosition(Transform targetTile)
         {
             Vector3 movePosition = targetTile.position;
             movePosition.y += 0.55f;
@@ -106,7 +116,7 @@ namespace AztecArmy.Units
             {
                 gameManager.selectionState = 0;
             }
-        }
+        }*/
         public void BasicAttack(Unit target)
         {
             target.health -= basicDamage;
@@ -117,17 +127,21 @@ namespace AztecArmy.Units
             }
             gameManager.selectionState = 0;
         }
-        protected virtual void Start()
+        protected void Start()
         {
-            unitWorldCanvas = transform.GetChild(0).gameObject;
-            gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
-            gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
-
+            OnUnitSpawn();
             //Testing
             health = 6;
             basicDamage = 2;
             moveSpeed = 3;
             attackRange = 1;
+        }
+        protected void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                SetGridPosition();
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ namespace AztecArmy.Units
         
         public void Shield()
         {
-
             active = false;
             unitWorldCanvas.SetActive(false);
         }
