@@ -13,6 +13,7 @@ namespace AztecArmy.Units
         public GameManager gameManager;
         public GridManager gridManager;
         public GameObject unitWorldCanvas, moveButton, attackButton;
+        public Tile unitCurrentTile;
         [SerializeField]
         [Header("Unit Metrics")]
         public int health, basicDamage, moveSpeed, attackRange;
@@ -25,7 +26,7 @@ namespace AztecArmy.Units
             gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
             //gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
-            //SetGridPosition();
+            SetGridPosition();
             Debug.Log("Set up complete");
         }
         public void OnTurnStart()
@@ -73,6 +74,7 @@ namespace AztecArmy.Units
                 transform.position = tile.PivotPoint;
                 transform.SetParent(tile.transform);
                 moved = true;
+                unitCurrentTile = tile;
             }
             if (moved && attacked)
             {
@@ -82,6 +84,7 @@ namespace AztecArmy.Units
             {
                 gameManager.selectionState = 0;
             }
+            Debug.Log(x + " and " + z);
         }
         public void SetGridPosition()
         {
@@ -130,11 +133,12 @@ namespace AztecArmy.Units
         protected void Start()
         {
             OnUnitSpawn();
+
             //Testing
             health = 6;
             basicDamage = 2;
             moveSpeed = 3;
-            attackRange = 1;
+            attackRange = 3;
         }
         protected void Update()
         {
