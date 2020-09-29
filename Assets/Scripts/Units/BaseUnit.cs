@@ -28,5 +28,14 @@ namespace AztecArmy.Units
             gameManager.selectionState = 0;
         }
         //TESTING
+
+        protected override void Start()
+        {
+            base.Start();
+
+            health = 15;
+            moveRange = 5;
+            attackRange = 2;
+        }
     }
 }

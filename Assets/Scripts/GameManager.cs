@@ -48,8 +48,8 @@ namespace AztecArmy.gameManager
         void Start()
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
+
             gridManager.GenerateTiles();
 
             #region Team SetUp
@@ -79,7 +79,6 @@ namespace AztecArmy.gameManager
         void Update()
         {
             Tile currentTile = null;
-            List<Tile> path = new List<Tile>();
             switch (selectionState)
             {
                 case 0://selecting units
@@ -106,13 +105,14 @@ namespace AztecArmy.gameManager
                         {
                             selectedUnit.OnDeSelection();
                         }
-
                         selectedUnit = null;
                     }
                     break;
+
                 case 1://selecting movement
                     Ray ray1 = mainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit1;
+                    List<Tile> path = new List<Tile>();
                     if (Physics.Raycast(ray1, out hit1))
                     {
                         if(hit1.transform.GetComponent<Tile>() != null)
@@ -123,7 +123,7 @@ namespace AztecArmy.gameManager
                     }
                     if(Input.GetMouseButtonDown(0))
                     {
-                        if (path.Count > 0 && path.Count <= selectedUnit.moveSpeed && currentTile != null)
+                        if (path.Count > 0 && path.Count <= selectedUnit.moveRange && currentTile != null)
                         {
                             Debug.Log("move attempted");
                             selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
@@ -171,9 +171,6 @@ namespace AztecArmy.gameManager
                         {
                             spwanDistance = Vector3.Distance(currentTile.PivotPoint, selectedUnit.unitCurrentTile.PivotPoint);
                             Debug.Log(spwanDistance);
-
-                            /*currentTile = hit3.transform.GetComponent<Tile>();
-                            path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);*/
                         }
                     }
                     if (Input.GetMouseButtonDown(0))

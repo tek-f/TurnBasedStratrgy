@@ -13,5 +13,15 @@ namespace AztecArmy.Units
             active = false;
             unitWorldCanvas.SetActive(false);
         }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            health = 10;
+            basicDamage = 2;
+            moveRange = 2;
+            attackRange = 1;
+        }
     }
 }

@@ -16,9 +16,9 @@ namespace AztecArmy.Units
         public Tile unitCurrentTile;
         [SerializeField]
         [Header("Unit Metrics")]
-        public int health, basicDamage, moveSpeed, attackRange;
+        protected int health, basicDamage, unitType;
         public bool active, moved, attacked;
-        public int teamID;
+        public int teamID, moveRange, attackRange;
         #endregion
         public void OnUnitSpawn()
         {
@@ -27,7 +27,27 @@ namespace AztecArmy.Units
             //gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
             SetGridPosition();
-            Debug.Log("Set up complete");
+            switch (unitType)
+            {
+                case 0://Base Unit
+                    health = 15;
+                    basicDamage = 0;
+                    moveRange = 5;
+                    attackRange = 2;
+                    break;
+                case 1://Melee Unit
+                    health = 10;
+                    basicDamage = 2;
+                    moveRange = 2;
+                    attackRange = 1;
+                    break;
+                case 2://Ranged Unit
+                    health = 5;
+                    basicDamage = 4;
+                    moveRange = 1;
+                    attackRange = 4;
+                    break;
+            }
         }
         public void OnTurnStart()
         {
@@ -104,22 +124,7 @@ namespace AztecArmy.Units
                 Debug.Log("no parent found");
             }
         }
-        /*public void MoveToPosition(Transform targetTile)
-        {
-            Vector3 movePosition = targetTile.position;
-            movePosition.y += 0.55f;
-            gameObject.transform.position = movePosition;
-            moved = true;
 
-            if (moved && attacked)
-            {
-                active = false;
-            }
-            if (gameManager != null)
-            {
-                gameManager.selectionState = 0;
-            }
-        }*/
         public void BasicAttack(Unit target)
         {
             target.health -= basicDamage;
@@ -130,22 +135,15 @@ namespace AztecArmy.Units
             }
             gameManager.selectionState = 0;
         }
-        protected void Start()
+        protected virtual void Start()
         {
             OnUnitSpawn();
 
-            //Testing
-            health = 6;
-            basicDamage = 2;
-            moveSpeed = 3;
-            attackRange = 3;
-        }
-        protected void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.S))
-            {
-                SetGridPosition();
-            }
+            ////Testing
+            //health = 6;
+            //basicDamage = 2;
+            //moveSpeed = 3;
+            //attackRange = 3;
         }
     }
 }
