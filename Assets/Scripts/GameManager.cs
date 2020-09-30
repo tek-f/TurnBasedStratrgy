@@ -17,8 +17,8 @@ namespace AztecArmy.gameManager
         [SerializeField]
         public List<List<Unit>> teamList = new List<List<Unit>>();
         public int numberOfTeams;
-        public List<Unit> team1Units = new List<Unit>();
-        public List<Unit> team2Units = new List<Unit>();
+        //public List<Unit> team1Units = new List<Unit>();
+        //public List<Unit> team2Units = new List<Unit>();
         public GameObject baseUnitPrefab;
         #endregion
         #region PathFinding
@@ -99,14 +99,14 @@ namespace AztecArmy.gameManager
                             }
                         }
                     }
-                    if (Input.GetButtonDown("Cancel"))
-                    {
-                        if (selectedUnit != null)
-                        {
-                            selectedUnit.OnDeSelection();
-                        }
-                        selectedUnit = null;
-                    }
+                    //if (Input.GetButtonDown("Cancel"))
+                    //{
+                    //    if (selectedUnit != null)
+                    //    {
+                    //        selectedUnit.OnDeSelection();
+                    //    }
+                    //    selectedUnit = null;
+                    //}
                     break;
 
                 case 1://selecting movement
@@ -125,14 +125,17 @@ namespace AztecArmy.gameManager
                     {
                         if (path.Count > 0 && path.Count <= selectedUnit.moveRange && currentTile != null)
                         {
-                            Debug.Log("move attempted");
                             selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
+                            selectionState = 0;
+                            selectedUnit = null;
                         }
                     }
-                    if (Input.GetButtonDown("Cancel"))
-                    {
-                        selectionState = 0;
-                    }
+                    //if (Input.GetButtonDown("Cancel"))
+                    //{
+                    //    selectionState = 0;
+                    //    selectedUnit.OnDeSelection();
+                    //    selectedUnit = null;
+                    //}
                     break;
 
                 case 2://selecting attack target
@@ -152,12 +155,16 @@ namespace AztecArmy.gameManager
                         if(attackDistance > 0 && attackDistance <= selectedUnit.attackRange)
                         {
                             selectedUnit.BasicAttack(hit2.transform.gameObject.GetComponent<Unit>());
+                            selectionState = 0;
+                            selectedUnit = null;
                         }
                     }
-                    if (Input.GetButtonDown("Cancel"))
-                    {
-                        selectionState = 0;
-                    }
+                    //if (Input.GetButtonDown("Cancel"))
+                    //{
+                    //    selectionState = 0;
+                    //    selectedUnit.OnDeSelection();
+                    //    selectedUnit = null;
+                    //}
                     break;
 
                 case 3://selecting target for spawn ability, specific to the base unit
@@ -178,12 +185,16 @@ namespace AztecArmy.gameManager
                         if(spwanDistance > 0 && spwanDistance <= selectedUnit.attackRange && currentTile != null)
                         {
                             selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit3.transform);
+                            selectionState = 0;
+                            selectedUnit = null;
                         }
                     }
-                    if (Input.GetButtonDown("Cancel"))
+                    /*if (Input.GetButtonDown("Cancel"))
                     {
                         selectionState = 0;
-                    }
+                        selectedUnit.OnDeSelection();
+                        selectedUnit = null;
+                    }*/
                     break;
 
                 default:
@@ -192,6 +203,15 @@ namespace AztecArmy.gameManager
                         Debug.LogWarning("Selection State Out of Range");
                     }
                     break;
+            }
+            if (Input.GetButtonDown("Cancel"))
+            {
+                selectionState = 0; 
+                if (selectedUnit != null)
+                {
+                    selectedUnit.OnDeSelection();
+                }
+                selectedUnit = null;
             }
         }
     }

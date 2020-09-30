@@ -12,7 +12,7 @@ namespace AztecArmy.Units
         [Header("Game Management")]
         public GameManager gameManager;
         public GridManager gridManager;
-        public GameObject unitWorldCanvas, moveButton, attackButton;
+        public GameObject unitWorldCanvas, moveButton, attackButton, specialButton;
         public Tile unitCurrentTile;
         [SerializeField]
         [Header("Unit Metrics")]
@@ -24,7 +24,6 @@ namespace AztecArmy.Units
         {
             unitWorldCanvas = transform.GetChild(0).gameObject;
             gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
-            //gameManager.AddUnitToList(gameObject.GetComponent<Unit>(), teamID);
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
             SetGridPosition();
             switch (unitType)
@@ -55,7 +54,8 @@ namespace AztecArmy.Units
             moved = false;
             attacked = false;
             moveButton.SetActive(true);
-            if (attackButton != null)
+            specialButton.SetActive(true);
+            if(attackButton)
             {
                 attackButton.SetActive(true);
             }
@@ -66,14 +66,16 @@ namespace AztecArmy.Units
             {
                 moveButton.SetActive(false);
             }
-            if (attacked && attackButton != null)
+            if (attacked && attackButton)
             {
                 attackButton.SetActive(false);
             }
             unitWorldCanvas.SetActive(true);
         }
         public void OnDeSelection()
-        {
+        {                
+            moveButton.SetActive(true);
+            attackButton.SetActive(true);
             unitWorldCanvas.SetActive(false);
         }
         public void SelectMovement()
@@ -100,31 +102,22 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
-            if (gameManager != null)
-            {
-                gameManager.selectionState = 0;
-            }
-            Debug.Log(x + " and " + z);
         }
         public void SetGridPosition()
         {
-            Debug.Log("called");
             RaycastHit hit;
             if(Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 5f))
             {
-                Debug.Log("Raycast has been cast");
                 if(hit.transform.GetComponent<Tile>() != null)
                 {
                     gameObject.transform.SetParent(hit.transform);
-                    Debug.Log("Parent set: " + gameObject.transform.parent.name);
                 }
             }
             else
             {
-                Debug.Log("no parent found");
+                Debug.LogWarning("no parent found");
             }
         }
-
         public void BasicAttack(Unit target)
         {
             target.health -= basicDamage;
@@ -133,7 +126,6 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
-            gameManager.selectionState = 0;
         }
         protected virtual void Start()
         {

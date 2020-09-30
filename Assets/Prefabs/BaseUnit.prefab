@@ -1019,14 +1019,17 @@ MonoBehaviour:
   unitWorldCanvas: {fileID: 0}
   moveButton: {fileID: 5782597088989967105}
   attackButton: {fileID: 0}
+  specialButton: {fileID: 1088513292663941635}
+  unitCurrentTile: {fileID: 0}
   health: 0
   basicDamage: 0
-  moveSpeed: 0
-  attackRange: 0
+  unitType: 0
   active: 1
   moved: 0
   attacked: 0
   teamID: 1
+  moveRange: 0
+  attackRange: 0
   unitPrefabs:
   - {fileID: 2359674507114824711, guid: a2520a9cbe7ec2b498a392f95a11f875, type: 3}
   - {fileID: 6850663813896207124, guid: e6b8c0d8d48317549b21738baed85bd8, type: 3}
