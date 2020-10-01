@@ -63,7 +63,7 @@ namespace AztecArmy.gameManager
                 //Add base unit to team list
                 teamList[i].Add(baseUnit);
                 //Set up base Unit
-                teamList[i][0].OnUnitSpawn();
+                teamList[i][0].OnUnitSpawn(0);
             }
 
             //TEMP Team base setup, will need to be changed to allow for more than two teams

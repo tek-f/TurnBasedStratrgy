@@ -28,78 +28,7 @@ namespace AztecArmy.gridManager
         public float m_rayDistance = 1000f;
         public float m_debugScale = .5f;
 
-        void Start()
-        {
-            //GenerateTiles();
-        }
-        //Temp Methods VVV
-        Tile GetTile(Vector3 point, float radius)
-        {
-            var colliders = Physics.OverlapSphere(point, radius);
-            foreach (var hit in colliders)
-            {
-                var tile = hit.GetComponent<Tile>();
-                if (tile != null)
-                {
-                    return tile;
-                }
-            }
-            return null;
-        }
-        Tile GetTile(Ray ray)
-        {
-            Tile tile = null;//temp tile
-            if (Physics.Raycast(ray, out var hit, m_rayDistance))
-            {
-                tile = hit.collider.GetComponent<Tile>();
-            }
-            return tile;//return tile that was hit
-        }
-        void OnDrawGizmos()
-        {
-            /*
-            if (m_tiles == null)
-                return;
-            Gizmos.color = Color.red;
-            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Gizmos.DrawLine(mouseRay.origin, mouseRay.origin + mouseRay.direction * m_rayDistance);
-            Gizmos.color = Color.blue;
-            var mouseTile = GetTile(mouseRay);
-            Tile endTile = null;
-            if (mouseTile != null)
-            {
-                // Hit a tile!
-                var center = mouseTile.transform.position;
-                var size = Vector3.one * m_spacing;
-                Gizmos.DrawCube(center, size);
-                endTile = mouseTile;
-            }
-
-            #region Manny Pathfinding Demo
-            //VERY TEMPORARY!!! -Manny
-            var startTile = GetTile(Vector3.zero, .5f);
-
-            if (startTile != null && endTile != null)
-            {
-                var path = FindPath(startTile, endTile);
-                if (path != null && path.Count > 0)
-                {
-                    var startPoint = path[0];
-                    var size = Vector3.one * m_debugScale;
-                    Gizmos.DrawCube(startPoint.Position, size);
-                    for (int i = 1; i < path.Count; i++)
-                    {
-                        var endPoint = path[i];
-                        Gizmos.DrawLine(startPoint.Position, endPoint.Position);
-                        Gizmos.DrawCube(startPoint.Position, size);
-                        startPoint = endPoint;
-                    }
-                }
-            }
-            #endregion
-            */
-        }
-        //Temp Methods  ^^^^
+        
         public void GenerateTiles()
         {
             m_tiles = new Tile[gridWidth, gridDepth];

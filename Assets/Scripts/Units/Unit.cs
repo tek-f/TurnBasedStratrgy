@@ -10,23 +10,22 @@ namespace AztecArmy.Units
     {
         #region Variables
         [Header("Game Management")]
-        public GameManager gameManager;
-        public GridManager gridManager;
-        public GameObject unitWorldCanvas, moveButton, attackButton, specialButton;
-        public Tile unitCurrentTile;
+        public GameManager gameManager;//reference var for game manager
+        public GridManager gridManager;//reference var for grid  manager
+        public GameObject unitWorldCanvas, moveButton, attackButton, specialButton;//reference var for units world space canvas and GUI
+        public Tile unitCurrentTile;//the tile the unit is currently on, is set in SetGridPosition(), and 
         [SerializeField]
         [Header("Unit Metrics")]
-        protected int health, basicDamage, unitType;
+        protected int health, basicDamage;
         public bool active, moved, attacked;
         public int teamID, moveRange, attackRange;
         #endregion
-        public void OnUnitSpawn()
+        public void OnUnitSpawn(int unitType)//set up function for units, with int unitType to determine which unit type is being spawned
         {
-            unitWorldCanvas = transform.GetChild(0).gameObject;
-            gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();
-            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
-            SetGridPosition();
-            switch (unitType)
+            unitWorldCanvas = transform.GetChild(0).gameObject;//sets reference to units World Space canvas
+            gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();//sets reference to game manager object
+            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();//sets reference to grid manager object
+            switch (unitType)//Sets the units health, attack damage, movement range and attack range depending on what unit type is being spawned
             {
                 case 0://Base Unit
                     health = 15;
@@ -126,16 +125,6 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
-        }
-        protected virtual void Start()
-        {
-            OnUnitSpawn();
-
-            ////Testing
-            //health = 6;
-            //basicDamage = 2;
-            //moveSpeed = 3;
-            //attackRange = 3;
         }
     }
 }

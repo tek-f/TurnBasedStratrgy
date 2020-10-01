@@ -27,15 +27,10 @@ namespace AztecArmy.Units
             unitToSpawn = null;
             gameManager.selectionState = 0;
         }
-        //TESTING
 
-        protected override void Start()
+        private void Start()
         {
-            base.Start();
-
-            health = 15;
-            moveRange = 5;
-            attackRange = 2;
+            OnUnitSpawn(0);
         }
     }
 }

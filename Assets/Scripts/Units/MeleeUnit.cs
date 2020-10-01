@@ -6,7 +6,6 @@ namespace AztecArmy.Units
 {
     public class MeleeUnit : Unit
     {
-        bool defending;
         
         public void Shield()
         {
@@ -14,14 +13,9 @@ namespace AztecArmy.Units
             unitWorldCanvas.SetActive(false);
         }
 
-        protected override void Start()
+        private void Start()
         {
-            base.Start();
-
-            health = 10;
-            basicDamage = 2;
-            moveRange = 2;
-            attackRange = 1;
+            OnUnitSpawn(1);
         }
     }
 }
