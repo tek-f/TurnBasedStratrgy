@@ -1023,7 +1023,6 @@ MonoBehaviour:
   unitCurrentTile: {fileID: 0}
   health: 0
   basicDamage: 0
-  unitType: 0
   active: 1
   moved: 0
   attacked: 0

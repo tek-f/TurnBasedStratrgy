@@ -10,15 +10,49 @@ namespace AztecArmy.Units
     {
         #region Variables
         [Header("Game Management")]
-        public GameManager gameManager;//reference var for game manager
-        public GridManager gridManager;//reference var for grid  manager
-        public GameObject unitWorldCanvas, moveButton, attackButton, specialButton;//reference var for units world space canvas and GUI
-        public Tile unitCurrentTile;//the tile the unit is currently on, is set in SetGridPosition(), and 
-        [SerializeField]
+        public GameManager gameManager;//reference variable for the game manager
+        public GridManager gridManager;//reference variable for gthe rid manager
+        public GameObject unitWorldCanvas, moveButton, attackButton, specialButton;//reference variables for the units world space canvas and GUI
+        public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace() 
         [Header("Unit Metrics")]
+        [SerializeField]
         protected int health, basicDamage;
-        public bool active, moved, attacked;
-        public int teamID, moveRange, attackRange;
+        public int BasicDamage
+        {
+            get { return basicDamage; }
+        }
+        [SerializeField]
+        protected bool active, moved, attacked;
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
+        public bool Moved
+        {
+            get { return moved; }
+            set { moved = value; }
+        }
+        public bool Attacked
+        {
+            get { return attacked; }
+            set { attacked = value; }
+        }
+        [SerializeField]
+        protected int teamID, moveRange, attackRange;
+        public int TeamID
+        {
+            get { return teamID; }
+            set { teamID = value; }
+        }
+        public int AttackRange
+        {
+            get { return attackRange; }
+        }
+        public int MoveRange
+        {
+            get { return moveRange; }
+        }
         #endregion
         public void OnUnitSpawn(int unitType)//set up function for units, with int unitType to determine which unit type is being spawned
         {
@@ -59,6 +93,10 @@ namespace AztecArmy.Units
                 attackButton.SetActive(true);
             }
         }
+        public void GUISetUp()
+        {
+            
+        }
         public void OnSelection()
         {
             if (moved)
@@ -69,12 +107,19 @@ namespace AztecArmy.Units
             {
                 attackButton.SetActive(false);
             }
+            if(attacked || moved)
+            {
+                specialButton.SetActive(false);
+            }
             unitWorldCanvas.SetActive(true);
         }
         public void OnDeSelection()
         {                
             moveButton.SetActive(true);
-            attackButton.SetActive(true);
+            if (attackButton)
+            {
+                attackButton.SetActive(true);
+            }
             unitWorldCanvas.SetActive(false);
         }
         public void SelectMovement()
@@ -125,6 +170,10 @@ namespace AztecArmy.Units
             {
                 active = false;
             }
+        }
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
         }
     }
 }

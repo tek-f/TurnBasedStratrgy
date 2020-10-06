@@ -10,6 +10,7 @@ namespace AztecArmy.Units
     {
         public List<GameObject> unitPrefabs = new List<GameObject>();
         public GameObject unitToSpawn;
+        public GameObject SpawnRangedUnitButton, SpawnMeleeUnitButton;
         public void SpawnUnitSelection(int unitType)
         {
             unitToSpawn = unitPrefabs[unitType];
@@ -20,14 +21,13 @@ namespace AztecArmy.Units
             GameObject spawnedObject = Instantiate(unitToSpawn);
             Tile tile = targetTile.GetComponent<Tile>();
             Unit spawnedUnit = spawnedObject.GetComponent<Unit>();
-            spawnedUnit.teamID = teamID;
+            spawnedUnit.TeamID = teamID;
             spawnedUnit.MoveToGridSpace(gridManager, tile.x, tile.z);
             gameManager.AddUnitToList(spawnedUnit, teamID);
             active = false;
             unitToSpawn = null;
             gameManager.selectionState = 0;
         }
-
         private void Start()
         {
             OnUnitSpawn(0);

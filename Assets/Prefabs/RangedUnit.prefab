@@ -414,18 +414,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a993f9a8286fc448cc79d2dfdb021b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
+  gameManager: {fileID: 0}
+  gridManager: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
   moveButton: {fileID: 6850663814337673612}
   attackButton: {fileID: 6850663814587779967}
+  specialButton: {fileID: 15399802536337550}
+  unitCurrentTile: {fileID: 0}
   health: 0
   basicDamage: 0
-  moveSpeed: 0
-  attackRange: 0
   active: 0
   moved: 0
   attacked: 0
   teamID: 0
+  moveRange: 0
+  attackRange: 0
 --- !u!1 &6850663813945808390
 GameObject:
   m_ObjectHideFlags: 0

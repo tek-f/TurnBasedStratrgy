@@ -59,7 +59,7 @@ namespace AztecArmy.gameManager
                 //Instantiate prefab of base unit
                 Unit baseUnit = Instantiate(baseUnitPrefab).GetComponent<Unit>();
                 //Set team ID
-                baseUnit.teamID = i + 1;
+                baseUnit.TeamID = i + 1;
                 //Add base unit to team list
                 teamList[i].Add(baseUnit);
                 //Set up base Unit
@@ -88,13 +88,14 @@ namespace AztecArmy.gameManager
                         RaycastHit hit0;
                         if (Physics.Raycast(ray0, out hit0))
                         {
-                            Unit tempUnit = hit0.transform.gameObject.GetComponent<Unit>();
-                            if (tempUnit != null && tempUnit.teamID == currentTeam && tempUnit.active)
+                            Unit tempUnit0 = hit0.transform.gameObject.GetComponent<Unit>();
+                            if (tempUnit0 != null && tempUnit0.TeamID == currentTeam && tempUnit0.Active == true)
                             {
                                 if (selectedUnit != null)
+                                {
                                     selectedUnit.OnDeSelection();
-
-                                selectedUnit = hit0.transform.gameObject.GetComponent<Unit>();
+                                }
+                                selectedUnit = tempUnit0;
                                 selectedUnit.OnSelection();
                             }
                         }
@@ -123,7 +124,7 @@ namespace AztecArmy.gameManager
                     }
                     if(Input.GetMouseButtonDown(0))
                     {
-                        if (path.Count > 0 && path.Count <= selectedUnit.moveRange && currentTile != null)
+                        if (path.Count > 0 && path.Count <= selectedUnit.MoveRange && currentTile != null)
                         {
                             selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
                             selectionState = 0;
@@ -141,20 +142,22 @@ namespace AztecArmy.gameManager
                 case 2://selecting attack target
                     Ray ray2 = mainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit2;
+                    Unit tempUnit2 = null;
                     float attackDistance = 0;
                     if (Physics.Raycast(ray2, out hit2))
                     {
-                        Unit tempUnit = hit2.transform.gameObject.GetComponent<Unit>();
-                        if (tempUnit != null)
+                        tempUnit2 = hit2.transform.gameObject.GetComponent<Unit>();
+                        if (tempUnit2 != null)
                         {
-                            attackDistance = Vector3.Distance(selectedUnit.unitCurrentTile.PivotPoint, tempUnit.unitCurrentTile.PivotPoint);
+                            attackDistance = Vector3.Distance(selectedUnit.unitCurrentTile.PivotPoint, tempUnit2.unitCurrentTile.PivotPoint);
                         }
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if(attackDistance > 0 && attackDistance <= selectedUnit.attackRange)
+                        if(attackDistance > 0 && attackDistance <= selectedUnit.AttackRange)
                         {
-                            selectedUnit.BasicAttack(hit2.transform.gameObject.GetComponent<Unit>());
+                            tempUnit2.TakeDamage(selectedUnit.BasicDamage);
+                            selectedUnit.Attacked = true;
                             selectionState = 0;
                             selectedUnit = null;
                         }
@@ -182,7 +185,7 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if(spwanDistance > 0 && spwanDistance <= selectedUnit.attackRange && currentTile != null)
+                        if(spwanDistance > 0 && spwanDistance <= selectedUnit.AttackRange && currentTile != null)
                         {
                             selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit3.transform);
                             selectionState = 0;
