@@ -21,6 +21,10 @@ namespace AztecArmy.Units
         {
             get { return basicDamage; }
         }
+        public int UnitType
+        {
+            get { return unitType; }
+        }
         [SerializeField]
         protected bool active, moved, attacked, shielded;
         public bool Active
@@ -59,6 +63,15 @@ namespace AztecArmy.Units
             get { return moveRange; }
         }
         #endregion
+        #region Status Effects
+        protected bool poisoned;
+        protected int poisonedDuration = 2, currentPoisonedDuration, poisonedDamage = 2;
+        public bool Poisoned
+        {
+            get { return poisoned; }
+            set { poisoned = value; }
+        }
+        #endregion
         public void OnUnitSpawn(int UnitType)//set up function for units, with int unitType to determine which unit type is being spawned
         {
             unitWorldCanvas = transform.GetChild(0).gameObject;//sets reference to units World Space canvas
@@ -92,11 +105,17 @@ namespace AztecArmy.Units
             active = true;
             moved = false;
             attacked = false;
+
             moveButton.SetActive(true);
             specialButton.SetActive(true);
             if(attackButton)
             {
                 attackButton.SetActive(true);
+            }
+
+            if(poisoned)
+            {
+                TakeDamage(poisonedDamage);
             }
         }
         public void GUISetUp()

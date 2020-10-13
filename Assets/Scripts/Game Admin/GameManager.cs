@@ -13,6 +13,7 @@ namespace AztecArmy.gameManager
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;//used to track which team is active, i.e. which team's turn it is
         Camera mainCamera;
+        [SerializeField] GameObject HUDPanel, gameOverPanel;
         #endregion
         #region Units
         public Unit selectedUnit;//the unit that is currently selected by the game manager
@@ -56,8 +57,8 @@ namespace AztecArmy.gameManager
         }
         public void EndGame()
         {
-            //open end game UI
-            //go to different screen?
+            HUDPanel.SetActive(false);//close the game heads up display UI
+            gameOverPanel.SetActive(true);//open end game UI
         }
         void Start()
         {

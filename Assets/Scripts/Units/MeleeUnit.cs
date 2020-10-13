@@ -17,7 +17,6 @@ namespace AztecArmy.Units
             Debug.Log(shieldedUnit + " has been shielded");
             active = false;
         }
-
         private void Start()
         {
             OnUnitSpawn(1);
