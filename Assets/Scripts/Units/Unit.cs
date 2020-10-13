@@ -22,7 +22,7 @@ namespace AztecArmy.Units
             get { return basicDamage; }
         }
         [SerializeField]
-        protected bool active, moved, attacked;
+        protected bool active, moved, attacked, shielded;
         public bool Active
         {
             get { return active; }
@@ -37,6 +37,11 @@ namespace AztecArmy.Units
         {
             get { return attacked; }
             set { attacked = value; }
+        }
+        public bool Shielded
+        {
+            get { return shielded; }
+            set { shielded = value; }
         }
         [SerializeField]
         protected int teamID, moveRange, attackRange;
@@ -65,19 +70,19 @@ namespace AztecArmy.Units
                     health = 15;
                     basicDamage = 0;
                     moveRange = 5;
-                    attackRange = 2;
+                    attackRange = 3;
                     break;
                 case 1://Melee Unit
                     health = 10;
                     basicDamage = 2;
-                    moveRange = 2;
-                    attackRange = 1;
+                    moveRange = 4;
+                    attackRange = 3;
                     break;
                 case 2://Ranged Unit
                     health = 5;
                     basicDamage = 4;
-                    moveRange = 1;
-                    attackRange = 4;
+                    moveRange = 3;
+                    attackRange = 6;
                     break;
             }
         }
@@ -173,7 +178,14 @@ namespace AztecArmy.Units
         }
         public void TakeDamage(int damage)
         {
+            if (shielded)
+            {
+                shielded = false;
+                Debug.Log("attack shielded");
+                return;
+            }
             health -= damage;
+            Debug.Log(damage + " damage taken");
         }
     }
 }

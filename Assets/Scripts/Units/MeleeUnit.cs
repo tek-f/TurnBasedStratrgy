@@ -6,11 +6,16 @@ namespace AztecArmy.Units
 {
     public class MeleeUnit : Unit
     {
-        
-        public void Shield()
+        public void ShieldUnitSelection()
         {
-            active = false;
+            gameManager.selectionState = 4;
             unitWorldCanvas.SetActive(false);
+        }
+        public void ShieldUnit(Unit shieldedUnit)
+        {
+            shieldedUnit.Shielded = true;
+            Debug.Log(shieldedUnit + " has been shielded");
+            active = false;
         }
 
         private void Start()

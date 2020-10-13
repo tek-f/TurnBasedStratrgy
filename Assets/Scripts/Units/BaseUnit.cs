@@ -26,7 +26,6 @@ namespace AztecArmy.Units
             gameManager.AddUnitToList(spawnedUnit, teamID);
             active = false;
             unitToSpawn = null;
-            gameManager.selectionState = 0;
         }
         private void Start()
         {

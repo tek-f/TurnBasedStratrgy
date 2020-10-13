@@ -9,13 +9,15 @@ namespace AztecArmy.gameManager
     public class GameManager : MonoBehaviour
     {
         #region Variables
-        #region Units
-        public Unit selectedUnit;
+        #region Game Setup
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;//used to track which team is active, i.e. which team's turn it is
         Camera mainCamera;
+        #endregion
+        #region Units
+        public Unit selectedUnit;//the unit that is currently selected by the game manager
         [SerializeField]
-        public List<List<Unit>> teamList = new List<List<Unit>>();
+        public List<List<Unit>> teamList = new List<List<Unit>>();//a list of lists of units, functions as the list of teams in the game, and as 
         public int numberOfTeams;
         //public List<Unit> team1Units = new List<Unit>();
         //public List<Unit> team2Units = new List<Unit>();
@@ -23,6 +25,9 @@ namespace AztecArmy.gameManager
         #endregion
         #region PathFinding
         GridManager gridManager;
+        #endregion
+        #region Mana
+
         #endregion
         #endregion
         public void EndTurn()
@@ -50,10 +55,10 @@ namespace AztecArmy.gameManager
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
 
-            gridManager.GenerateTiles();
+            gridManager.GenerateTiles();//Generate the game map
 
             #region Team SetUp
-            for (int i = 0; i < numberOfTeams; i++)
+            for (int i = 0; i < numberOfTeams; i++)//Loops through the list of teams
             {
                 teamList.Add(new List<Unit>());
                 //Instantiate prefab of base unit
@@ -91,6 +96,7 @@ namespace AztecArmy.gameManager
                             Unit tempUnit0 = hit0.transform.gameObject.GetComponent<Unit>();
                             if (tempUnit0 != null && tempUnit0.TeamID == currentTeam && tempUnit0.Active == true)
                             {
+                                Debug.Log(tempUnit0 + " unit clicked on");
                                 if (selectedUnit != null)
                                 {
                                     selectedUnit.OnDeSelection();
@@ -154,6 +160,7 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
+                        Debug.Log(attackDistance);
                         if(attackDistance > 0 && attackDistance <= selectedUnit.AttackRange)
                         {
                             tempUnit2.TakeDamage(selectedUnit.BasicDamage);
@@ -199,11 +206,28 @@ namespace AztecArmy.gameManager
                         selectedUnit = null;
                     }*/
                     break;
-
+                case 4://selecting the target for the melee units shield ability
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray4 = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit4;
+                        if(Physics.Raycast(ray4, out hit4))
+                        {
+                            Unit tempUnit4 = hit4.transform.gameObject.GetComponent<Unit>();
+                            if (tempUnit4 != null && tempUnit4.TeamID == selectedUnit.TeamID)
+                            {
+                                selectedUnit.transform.gameObject.GetComponent<MeleeUnit>().ShieldUnit(tempUnit4);
+                                selectedUnit.Active = false;
+                                selectedUnit = null;
+                                selectionState = 0;
+                            }
+                        }
+                    }
+                    break;
                 default:
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Debug.LogWarning("Selection State Out of Range");
+                        Debug.LogWarning("Game Manager Selection State Out of Range");
                     }
                     break;
             }

@@ -531,6 +531,7 @@ MonoBehaviour:
   active: 0
   moved: 0
   attacked: 0
+  shielded: 0
   teamID: 0
   moveRange: 0
   attackRange: 0
@@ -831,7 +832,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -5144179248406429509}
-        m_MethodName: Shield
+        m_MethodName: ShieldUnitSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
