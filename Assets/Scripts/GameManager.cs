@@ -50,6 +50,14 @@ namespace AztecArmy.gameManager
         {
             teamList[team - 1].Add(unit);
         }
+        public void RemoveUnitFromList(Unit unit, int team)
+        {
+            teamList[team - 1].Remove(unit);
+        }
+        public void EndGame()
+        {
+
+        }
         void Start()
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();

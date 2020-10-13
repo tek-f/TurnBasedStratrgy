@@ -16,7 +16,7 @@ namespace AztecArmy.Units
         public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace() 
         [Header("Unit Metrics")]
         [SerializeField]
-        protected int health, basicDamage;
+        protected int health, basicDamage, unitType;
         public int BasicDamage
         {
             get { return basicDamage; }
@@ -59,12 +59,12 @@ namespace AztecArmy.Units
             get { return moveRange; }
         }
         #endregion
-        public void OnUnitSpawn(int unitType)//set up function for units, with int unitType to determine which unit type is being spawned
+        public void OnUnitSpawn(int UnitType)//set up function for units, with int unitType to determine which unit type is being spawned
         {
             unitWorldCanvas = transform.GetChild(0).gameObject;//sets reference to units World Space canvas
             gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();//sets reference to game manager object
             gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();//sets reference to grid manager object
-            switch (unitType)//Sets the units health, attack damage, movement range and attack range depending on what unit type is being spawned
+            switch (UnitType)//Sets the units health, attack damage, movement range and attack range depending on what unit type is being spawned
             {
                 case 0://Base Unit
                     health = 15;
@@ -85,6 +85,7 @@ namespace AztecArmy.Units
                     attackRange = 6;
                     break;
             }
+            unitType = UnitType;
         }
         public void OnTurnStart()
         {
@@ -185,7 +186,16 @@ namespace AztecArmy.Units
                 return;
             }
             health -= damage;
-            Debug.Log(damage + " damage taken");
+            if(health <= 0)
+            {
+                gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
+                if (unitType == 0)//if unit is base unit
+                {
+
+                }
+                //game ends
+                //destroy the unit
+            }
         }
     }
 }
