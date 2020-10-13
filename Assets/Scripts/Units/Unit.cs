@@ -115,12 +115,21 @@ namespace AztecArmy.Units
 
             if(poisoned)
             {
-                TakeDamage(poisonedDamage);
+                health -= poisonedDamage;
+                if (health <= 0)
+                {
+                    UnitDeath();
+                }
             }
         }
-        public void GUISetUp()
+        public void UnitDeath()
         {
-            
+            gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
+            if (unitType == 0)//if unit is base unit
+            {
+                gameManager.EndGame();//game ends
+            }
+            Destroy(gameObject);//destroy the unit
         }
         public void OnSelection()
         {
@@ -173,6 +182,22 @@ namespace AztecArmy.Units
                 active = false;
             }
         }
+        public void TakeDamage(int damage)
+        {
+            if (shielded)
+            {
+                shielded = false;
+                Debug.Log("attack shielded");
+                return;
+            }
+            health -= damage;
+            if(health <= 0)
+            {
+                UnitDeath();
+            }
+        }
+
+        #region Old Code
         public void SetGridPosition()
         {
             RaycastHit hit;
@@ -197,24 +222,7 @@ namespace AztecArmy.Units
                 active = false;
             }
         }
-        public void TakeDamage(int damage)
-        {
-            if (shielded)
-            {
-                shielded = false;
-                Debug.Log("attack shielded");
-                return;
-            }
-            health -= damage;
-            if(health <= 0)
-            {
-                gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
-                if (unitType == 0)//if unit is base unit
-                {
-                    gameManager.EndGame();//game ends
-                }
-                Destroy(gameObject);//destroy the unit
-            }
-        }
+
+        #endregion
     }
 }

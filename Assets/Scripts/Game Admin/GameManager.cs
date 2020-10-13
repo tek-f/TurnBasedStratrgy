@@ -17,8 +17,7 @@ namespace AztecArmy.gameManager
         #endregion
         #region Units
         public Unit selectedUnit;//the unit that is currently selected by the game manager
-        [SerializeField]
-        public List<List<Unit>> teamList = new List<List<Unit>>();//a list of lists of units, functions as the list of teams in the game, and as 
+        public List<List<Unit>> teamList = new List<List<Unit>>();//a list of a list of units, functions as both the list of teams in the game, and as the individual team lists
         public int numberOfTeams;
         //public List<Unit> team1Units = new List<Unit>();
         //public List<Unit> team2Units = new List<Unit>();
@@ -33,7 +32,15 @@ namespace AztecArmy.gameManager
         #endregion
         public void EndTurn()
         {
-            if(currentTeam == numberOfTeams)
+            if (selectedUnit != null)
+            {
+                selectedUnit.OnDeSelection();
+                selectedUnit = null;
+            }
+
+            selectionState = 0;
+
+            if (currentTeam == numberOfTeams)
             {
                 currentTeam = 1;
             }
@@ -46,6 +53,7 @@ namespace AztecArmy.gameManager
             {
                 unit.OnTurnStart();
             }
+
         }
         public void AddUnitToList(Unit unit, int team)
         {
@@ -209,7 +217,19 @@ namespace AztecArmy.gameManager
                     }
                     break;
                 case 5://selecting the target for poision unit ability, specific to ranged unit ability
-
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray5 = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit5;
+                        if (Physics.Raycast(ray5, out hit5))
+                        {
+                            Unit tempUnit5 = hit5.transform.gameObject.GetComponent<Unit>();
+                            if (tempUnit5 != null && tempUnit5.TeamID != selectedUnit.TeamID)
+                            {
+                                selectedUnit.transform.gameObject.GetComponent<RangedUnit>().PoisonAttack(tempUnit5);
+                            }
+                        }
+                    }
                     break;
                 case 6://for interactng with world space UI
 

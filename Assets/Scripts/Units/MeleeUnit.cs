@@ -6,7 +6,7 @@ namespace AztecArmy.Units
 {
     public class MeleeUnit : Unit
     {
-        public void ShieldUnitSelection()
+        public void SelectShieldUnit()
         {
             gameManager.selectionState = 4;
             unitWorldCanvas.SetActive(false);
