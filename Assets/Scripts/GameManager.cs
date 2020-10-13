@@ -56,7 +56,8 @@ namespace AztecArmy.gameManager
         }
         public void EndGame()
         {
-
+            //open end game UI
+            //go to different screen?
         }
         void Start()
         {
@@ -114,14 +115,6 @@ namespace AztecArmy.gameManager
                             }
                         }
                     }
-                    //if (Input.GetButtonDown("Cancel"))
-                    //{
-                    //    if (selectedUnit != null)
-                    //    {
-                    //        selectedUnit.OnDeSelection();
-                    //    }
-                    //    selectedUnit = null;
-                    //}
                     break;
 
                 case 1://selecting movement
@@ -145,12 +138,6 @@ namespace AztecArmy.gameManager
                             selectedUnit = null;
                         }
                     }
-                    //if (Input.GetButtonDown("Cancel"))
-                    //{
-                    //    selectionState = 0;
-                    //    selectedUnit.OnDeSelection();
-                    //    selectedUnit = null;
-                    //}
                     break;
 
                 case 2://selecting attack target
@@ -177,12 +164,6 @@ namespace AztecArmy.gameManager
                             selectedUnit = null;
                         }
                     }
-                    //if (Input.GetButtonDown("Cancel"))
-                    //{
-                    //    selectionState = 0;
-                    //    selectedUnit.OnDeSelection();
-                    //    selectedUnit = null;
-                    //}
                     break;
 
                 case 3://selecting target for spawn ability, specific to the base unit
@@ -207,14 +188,8 @@ namespace AztecArmy.gameManager
                             selectedUnit = null;
                         }
                     }
-                    /*if (Input.GetButtonDown("Cancel"))
-                    {
-                        selectionState = 0;
-                        selectedUnit.OnDeSelection();
-                        selectedUnit = null;
-                    }*/
                     break;
-                case 4://selecting the target for the melee units shield ability
+                case 4://selecting the target for the shield ability, specific to the melee unit
                     if (Input.GetMouseButtonDown(0))
                     {
                         Ray ray4 = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -231,6 +206,12 @@ namespace AztecArmy.gameManager
                             }
                         }
                     }
+                    break;
+                case 5://selecting the target for poision unit ability, specific to ranged unit ability
+
+                    break;
+                case 6://for interactng with world space UI
+
                     break;
                 default:
                     if (Input.GetMouseButtonDown(0))

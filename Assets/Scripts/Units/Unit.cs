@@ -74,7 +74,7 @@ namespace AztecArmy.Units
                     break;
                 case 1://Melee Unit
                     health = 10;
-                    basicDamage = 2;
+                    basicDamage = 10;
                     moveRange = 4;
                     attackRange = 3;
                     break;
@@ -118,6 +118,7 @@ namespace AztecArmy.Units
                 specialButton.SetActive(false);
             }
             unitWorldCanvas.SetActive(true);
+            gameManager.selectionState = 6;
         }
         public void OnDeSelection()
         {                
@@ -191,10 +192,9 @@ namespace AztecArmy.Units
                 gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
                 if (unitType == 0)//if unit is base unit
                 {
-
+                    gameManager.EndGame();//game ends
                 }
-                //game ends
-                //destroy the unit
+                Destroy(gameObject);//destroy the unit
             }
         }
     }
