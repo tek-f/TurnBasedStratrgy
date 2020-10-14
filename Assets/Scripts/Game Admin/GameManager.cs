@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AztecArmy.Units;
 using AztecArmy.gridManager;
+using System.Linq;
 
 namespace AztecArmy.gameManager
 {
@@ -25,9 +26,11 @@ namespace AztecArmy.gameManager
         #endregion
         #region PathFinding
         GridManager gridManager;
+        GameObject pathCubePrefab;
         #endregion
         #region Mana
-
+        [SerializeField] List<int> mana = new List<int>();
+        int initialManaValue = 25;
         #endregion
         #endregion
         public void EndTurn()
@@ -48,8 +51,8 @@ namespace AztecArmy.gameManager
             {
                 currentTeam++;
             }
-
-            foreach (Unit unit in teamList[currentTeam - 1])
+            var tempTeamList = teamList[currentTeam - 1].ToList();
+            foreach (Unit unit in tempTeamList)
             {
                 unit.OnTurnStart();
             }
@@ -87,6 +90,8 @@ namespace AztecArmy.gameManager
                 teamList[i].Add(baseUnit);
                 //Set up base Unit
                 teamList[i][0].OnUnitSpawn(0);
+                //Set up mana
+                mana.Add(initialManaValue);
             }
 
             //TEMP Team base setup, will need to be changed to allow for more than two teams
@@ -120,7 +125,7 @@ namespace AztecArmy.gameManager
                                     selectedUnit.OnDeSelection();
                                 }
                                 selectedUnit = tempUnit0;
-                                selectedUnit.OnSelection();
+                                selectedUnit.OnSelection(mana[selectedUnit.TeamID - 1]);
                             }
                         }
                     }
@@ -132,13 +137,17 @@ namespace AztecArmy.gameManager
                     List<Tile> path = new List<Tile>();
                     if (Physics.Raycast(ray1, out hit1))
                     {
-                        if(hit1.transform.GetComponent<Tile>() != null)
+                        if (hit1.transform.GetComponent<Tile>() != null)
                         {
                             currentTile = hit1.transform.GetComponent<Tile>();
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
+                            foreach (var tile in path)
+                            {
+                                Instantiate(pathCubePrefab, tile.PivotPoint, tile.transform.rotation);
+                            }
                         }
                     }
-                    if(Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0))
                     {
                         if (path.Count > 0 && path.Count <= selectedUnit.MoveRange && currentTile != null)
                         {
@@ -165,10 +174,11 @@ namespace AztecArmy.gameManager
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log(attackDistance);
-                        if(attackDistance > 0 && attackDistance <= selectedUnit.AttackRange)
+                        if (attackDistance > 0 && attackDistance <= selectedUnit.AttackRange)
                         {
                             tempUnit2.TakeDamage(selectedUnit.BasicDamage);
                             selectedUnit.Attacked = true;
+                            mana[selectedUnit.TeamID - 1] -= selectedUnit.AttackManaCost;
                             selectionState = 0;
                             selectedUnit = null;
                         }
@@ -190,29 +200,34 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if(spwanDistance > 0 && spwanDistance <= selectedUnit.AttackRange && currentTile != null)
+                        if (spwanDistance > 0 && spwanDistance <= selectedUnit.AttackRange && currentTile != null)
                         {
                             selectedUnit.gameObject.GetComponent<BaseUnit>().SpawnUnit(hit3.transform);
+                            mana[selectedUnit.TeamID - 1] -= selectedUnit.SpecialManaCost;
                             selectionState = 0;
                             selectedUnit = null;
                         }
                     }
                     break;
                 case 4://selecting the target for the shield ability, specific to the melee unit
+                    Ray ray4 = mainCamera.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit4;
+                    Unit tempUnit4 = null;
+                    float shieldTargetDistance = 0;
+                    if (Physics.Raycast(ray4, out hit4))
+                    {
+                        tempUnit4 = hit4.transform.gameObject.GetComponent<Unit>();
+                        shieldTargetDistance = Vector3.Distance(tempUnit4.unitCurrentTile.PivotPoint, selectedUnit.unitCurrentTile.PivotPoint);
+                    }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Ray ray4 = mainCamera.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit4;
-                        if(Physics.Raycast(ray4, out hit4))
+                        if (tempUnit4 != null && tempUnit4.TeamID == selectedUnit.TeamID && shieldTargetDistance <= 1.5)
                         {
-                            Unit tempUnit4 = hit4.transform.gameObject.GetComponent<Unit>();
-                            if (tempUnit4 != null && tempUnit4.TeamID == selectedUnit.TeamID)
-                            {
-                                selectedUnit.transform.gameObject.GetComponent<MeleeUnit>().ShieldUnit(tempUnit4);
-                                selectedUnit.Active = false;
-                                selectedUnit = null;
-                                selectionState = 0;
-                            }
+                            selectedUnit.transform.gameObject.GetComponent<MeleeUnit>().ShieldUnit(tempUnit4);
+                            mana[selectedUnit.TeamID - 1] -= selectedUnit.SpecialManaCost;
+                            selectedUnit.Active = false;
+                            selectedUnit = null;
+                            selectionState = 0;
                         }
                     }
                     break;
@@ -227,6 +242,10 @@ namespace AztecArmy.gameManager
                             if (tempUnit5 != null && tempUnit5.TeamID != selectedUnit.TeamID)
                             {
                                 selectedUnit.transform.gameObject.GetComponent<RangedUnit>().PoisonAttack(tempUnit5);
+                                mana[selectedUnit.TeamID - 1] -= selectedUnit.SpecialManaCost;
+                                selectedUnit.Active = false;
+                                selectedUnit = null;
+                                selectionState = 0;
                             }
                         }
                     }
@@ -243,7 +262,7 @@ namespace AztecArmy.gameManager
             }
             if (Input.GetButtonDown("Cancel"))
             {
-                selectionState = 0; 
+                selectionState = 0;
                 if (selectedUnit != null)
                 {
                     selectedUnit.OnDeSelection();

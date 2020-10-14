@@ -936,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 5782597089647899033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.5, y: 0.6, z: -4.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 5782597089643894304}
   m_Father: {fileID: 0}
@@ -968,7 +968,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 18e4555f75be44b4b9ea57605bc0ec90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1017,15 +1017,17 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   gridManager: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
-  moveButton: {fileID: 5782597088989967105}
+  moveButton: {fileID: 5782597088989967107}
   attackButton: {fileID: 0}
-  specialButton: {fileID: 1088513292663941635}
+  specialButton: {fileID: 4086455656378951252}
   unitCurrentTile: {fileID: 0}
   health: 0
   basicDamage: 0
+  unitType: 0
   active: 1
   moved: 0
   attacked: 0
+  shielded: 0
   teamID: 1
   moveRange: 0
   attackRange: 0
@@ -1033,6 +1035,8 @@ MonoBehaviour:
   - {fileID: 2359674507114824711, guid: a2520a9cbe7ec2b498a392f95a11f875, type: 3}
   - {fileID: 6850663813896207124, guid: e6b8c0d8d48317549b21738baed85bd8, type: 3}
   unitToSpawn: {fileID: 0}
+  SpawnRangedUnitButton: {fileID: 5782597088707980111}
+  SpawnMeleeUnitButton: {fileID: 5782597090142514533}
 --- !u!1 &5782597090142514533
 GameObject:
   m_ObjectHideFlags: 0

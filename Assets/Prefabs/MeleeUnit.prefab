@@ -441,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 2359674507114824711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.5, y: 0.6, z: -4.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 2359674507127088062}
   m_Father: {fileID: 0}
@@ -473,7 +473,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d48588683c1d802418615df8d18d6201, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -522,13 +522,15 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   gridManager: {fileID: 0}
   unitWorldCanvas: {fileID: 0}
-  moveButton: {fileID: 2359674506504570527}
-  attackButton: {fileID: 2359674506220975212}
-  specialButton: {fileID: 9195219104425975709}
+  moveButton: {fileID: 2359674506504570525}
+  attackButton: {fileID: 2359674506220975210}
+  specialButton: {fileID: 5203583745095766986}
   unitCurrentTile: {fileID: 0}
   health: 0
   basicDamage: 0
   unitType: 0
+  attackManaCost: 0
+  specialManaCost: 0
   active: 0
   moved: 0
   attacked: 0
