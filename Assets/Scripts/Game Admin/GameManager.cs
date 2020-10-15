@@ -26,7 +26,6 @@ namespace AztecArmy.gameManager
         #endregion
         #region PathFinding
         GridManager gridManager;
-        GameObject pathCubePrefab;
         #endregion
         #region Mana
         [SerializeField] List<int> mana = new List<int>();
@@ -141,10 +140,6 @@ namespace AztecArmy.gameManager
                         {
                             currentTile = hit1.transform.GetComponent<Tile>();
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
-                            foreach (var tile in path)
-                            {
-                                Instantiate(pathCubePrefab, tile.PivotPoint, tile.transform.rotation);
-                            }
                         }
                     }
                     if (Input.GetMouseButtonDown(0))
