@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using AztecArmy.gameManager;
 using AztecArmy.gridManager;
 
@@ -14,8 +14,9 @@ namespace AztecArmy.Units
         public GameManager gameManager;//reference variable for the game manager
         public GridManager gridManager;//reference variable for gthe rid manager
         public GameObject unitWorldCanvas;//reference variables for the units world space canvas and GUI
-        public Button moveButton, attackButton, specialButton;
-        public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace() 
+        public GameObject moveButton, attackButton, specialButton;
+        public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace()
+        public LineRenderer gmLineRenderer;
         [Header("Unit Metrics")]
         [SerializeField]
         protected int health, basicDamage, unitType, attackManaCost, specialManaCost;
@@ -86,7 +87,8 @@ namespace AztecArmy.Units
         {
             unitWorldCanvas = transform.GetChild(0).gameObject;//sets reference to units World Space canvas
             gameManager = GameObject.FindWithTag("Game Manager").GetComponent<GameManager>();//sets reference to game manager object
-            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();//sets reference to grid manager object
+            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();//sets reference to grid manager object            
+            gmLineRenderer = gameManager.GetComponent<LineRenderer>();
             switch (UnitType)//Sets the units health, attack damage, movement range and attack range depending on what unit type is being spawned
             {
                 case 0://Base Unit
@@ -121,12 +123,12 @@ namespace AztecArmy.Units
             active = true;
             moved = false;
             attacked = false;
-
-            moveButton.interactable = true;
-            specialButton.interactable = true;
+            
+            moveButton.SetActive(true);
+            specialButton.SetActive(true);
             if (attackButton)
             {
-                attackButton.interactable = true;
+                attackButton.SetActive(true);
             }
             if(poisoned)
             {
@@ -156,31 +158,32 @@ namespace AztecArmy.Units
         {
             if (moved)
             {
-                moveButton.interactable = false;
+                moveButton.SetActive(false);
             }
-            if (attackButton && (attacked || currentMana < attackManaCost))
+            if (attackButton != null && (attacked || currentMana < attackManaCost))
             {
-                attackButton.interactable = false;
+                attackButton.SetActive(false);
             }
             if(attacked || moved || currentMana < specialManaCost)
             {
-                specialButton.interactable = false;
+                specialButton.SetActive(false);
             }
             unitWorldCanvas.SetActive(true);
             gameManager.selectionState = 6;
         }
         public void OnDeSelection()
         {                
-            moveButton.interactable = true;
-            if (attackButton)
+            moveButton.SetActive(true);
+            if (attackButton != null)
             {
-                attackButton.interactable = true;
+                attackButton.SetActive(true);
             }
             unitWorldCanvas.SetActive(false);
         }
         public void SelectMovement()
         {
             gameManager.selectionState = 1;
+            gmLineRenderer.enabled = true;
             unitWorldCanvas.SetActive(false);
         }
         public void SelectAttack()
@@ -242,7 +245,6 @@ namespace AztecArmy.Units
                 active = false;
             }
         }
-
         #endregion
     }
 }

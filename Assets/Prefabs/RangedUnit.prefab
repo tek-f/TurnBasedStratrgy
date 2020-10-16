@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 6850663813896207121}
   - component: {fileID: 6850663813896207126}
   - component: {fileID: -140964775814168255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RangedUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,11 +416,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   gridManager: {fileID: 0}
-  unitWorldCanvas: {fileID: 0}
-  moveButton: {fileID: 6850663814337673614}
-  attackButton: {fileID: 6850663814587779961}
-  specialButton: {fileID: 4006966579762179289}
+  unitWorldCanvas: {fileID: 6850663813883288914}
+  moveButton: {fileID: 6850663814337673612}
+  attackButton: {fileID: 6850663814587779967}
+  specialButton: {fileID: 15399802536337550}
   unitCurrentTile: {fileID: 0}
+  gmLineRenderer: {fileID: 0}
   health: 0
   basicDamage: 0
   unitType: 0
@@ -433,6 +434,8 @@ MonoBehaviour:
   teamID: 0
   moveRange: 0
   attackRange: 0
+  poisoned: 0
+  poisonAttackDamage: 2
 --- !u!1 &6850663813945808390
 GameObject:
   m_ObjectHideFlags: 0

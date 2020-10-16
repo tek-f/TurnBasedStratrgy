@@ -14,18 +14,18 @@ namespace AztecArmy.gameManager
         public int selectionState = 0;//used to determine what kind of selection state the player is in, i.e. selecting units, selecting where to move the selectedUnit
         public int currentTeam;//used to track which team is active, i.e. which team's turn it is
         Camera mainCamera;
+        LayerMask unitLayer = 8, tileLayer = 9;
         [SerializeField] GameObject HUDPanel, gameOverPanel;
         #endregion
         #region Units
         public Unit selectedUnit;//the unit that is currently selected by the game manager
         public List<List<Unit>> teamList = new List<List<Unit>>();//a list of a list of units, functions as both the list of teams in the game, and as the individual team lists
         public int numberOfTeams;
-        //public List<Unit> team1Units = new List<Unit>();
-        //public List<Unit> team2Units = new List<Unit>();
         public GameObject baseUnitPrefab;
         #endregion
         #region PathFinding
         GridManager gridManager;
+        LineRenderer lineRenderer;
         #endregion
         #region Mana
         [SerializeField] List<int> mana = new List<int>();
@@ -55,7 +55,6 @@ namespace AztecArmy.gameManager
             {
                 unit.OnTurnStart();
             }
-
         }
         public void AddUnitToList(Unit unit, int team)
         {
@@ -73,7 +72,8 @@ namespace AztecArmy.gameManager
         void Start()
         {
             mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();
+            gridManager = GameObject.FindWithTag("Grid Manager").GetComponent<GridManager>();            
+            lineRenderer = gameObject.GetComponent<LineRenderer>();
 
             gridManager.GenerateTiles();//Generate the game map
 
@@ -136,10 +136,22 @@ namespace AztecArmy.gameManager
                     List<Tile> path = new List<Tile>();
                     if (Physics.Raycast(ray1, out hit1))
                     {
-                        if (hit1.transform.GetComponent<Tile>() != null)
+                        if (hit1.transform.GetComponent<Tile>() != null /*&& hit1.transform.childCount < 0*/)
                         {
+                            //Path finding
                             currentTile = hit1.transform.GetComponent<Tile>();
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
+
+                            //Pathfinding Line Rendering
+                            lineRenderer.positionCount = path.Count();
+                            List<Vector3> pathLine = new List<Vector3>();
+                            for(int i = 0; i < path.Count; i++)
+                            {
+                                Vector3 lineVector = path[i].transform.position;
+                                lineVector.y = 0.25f;
+                                pathLine.Add(lineVector);
+                            }
+                            lineRenderer.SetPositions(pathLine.ToArray());
                         }
                     }
                     if (Input.GetMouseButtonDown(0))
@@ -148,6 +160,7 @@ namespace AztecArmy.gameManager
                         {
                             selectedUnit.MoveToGridSpace(gridManager, currentTile.x, currentTile.z);
                             selectionState = 0;
+                            lineRenderer.enabled = false;
                             selectedUnit = null;
                         }
                     }
