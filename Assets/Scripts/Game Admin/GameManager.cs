@@ -134,15 +134,16 @@ namespace AztecArmy.gameManager
                     Ray ray1 = mainCamera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit1;
                     List<Tile> path = new List<Tile>();
-                    if (Physics.Raycast(ray1, out hit1))
+                    if (Physics.Raycast(ray1, out hit1, 100f))
                     {
-                        if (hit1.transform.GetComponent<Tile>() != null /*&& hit1.transform.childCount < 0*/)
+                        Transform test1 = hit1.transform;
+                        if (hit1.transform.GetComponent<Tile>() != null && hit1.transform.childCount == 0)
                         {
                             //Path finding
                             currentTile = hit1.transform.GetComponent<Tile>();
                             path = gridManager.FindPath(selectedUnit.GetComponentInParent<Tile>(), currentTile);
 
-                            //Pathfinding Line Rendering
+                            //Path Line Rendering
                             lineRenderer.positionCount = path.Count();
                             List<Vector3> pathLine = new List<Vector3>();
                             for(int i = 0; i < path.Count; i++)
@@ -152,6 +153,10 @@ namespace AztecArmy.gameManager
                                 pathLine.Add(lineVector);
                             }
                             lineRenderer.SetPositions(pathLine.ToArray());
+                        }
+                        else
+                        {
+                            path.Clear();
                         }
                     }
                     if (Input.GetMouseButtonDown(0))
