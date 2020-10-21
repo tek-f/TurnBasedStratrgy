@@ -4,6 +4,7 @@ using UnityEngine;
 using AztecArmy.Units;
 using AztecArmy.gridManager;
 using System.Linq;
+using TMPro;
 
 namespace AztecArmy.gameManager
 {
@@ -30,6 +31,9 @@ namespace AztecArmy.gameManager
         #region Mana
         [SerializeField] List<int> mana = new List<int>();
         int initialManaValue = 25;
+        #endregion
+        #region End Game Display
+        [SerializeField] TMP_Text endGameTextDisplay;
         #endregion
         #endregion
         public void EndTurn()
@@ -64,9 +68,15 @@ namespace AztecArmy.gameManager
         {
             teamList[team - 1].Remove(unit);
         }
-        public void EndGame()
+        public void EndGame(int losingTeamID)
         {
+            int winningTeamID = 1;
+            if(losingTeamID == 1)
+            {
+                winningTeamID = 2;
+            }
             HUDPanel.SetActive(false);//close the game heads up display UI
+            endGameTextDisplay.text = "Team " + winningTeamID + " is victorious!";
             gameOverPanel.SetActive(true);//open end game UI
         }
         void Start()

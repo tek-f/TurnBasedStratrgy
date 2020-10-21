@@ -150,7 +150,7 @@ namespace AztecArmy.Units
             gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
             if (unitType == 0)//if unit is base unit
             {
-                gameManager.EndGame();//game ends
+                gameManager.EndGame(teamID);//game ends
             }
             Destroy(gameObject);//destroy the unit
         }
