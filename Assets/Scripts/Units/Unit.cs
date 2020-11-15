@@ -109,7 +109,7 @@ namespace AztecArmy.Units
                     break;
                 case 1://Melee Unit
                     health = 10;
-                    basicDamage = 10;
+                    basicDamage = 8;
                     moveRange = 4;
                     attackRange = 3;
                     attackManaCost = 1;
@@ -118,7 +118,7 @@ namespace AztecArmy.Units
                     break;
                 case 2://Ranged Unit
                     health = 5;
-                    basicDamage = 4;
+                    basicDamage = 6;
                     moveRange = 3;
                     attackRange = 6;
                     attackManaCost = 1;
