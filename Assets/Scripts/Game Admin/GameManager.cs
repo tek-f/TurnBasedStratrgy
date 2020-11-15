@@ -29,7 +29,7 @@ namespace AztecArmy.gameManager
         LineRenderer lineRenderer;
         #endregion
         #region Mana
-        [SerializeField] List<int> mana = new List<int>();
+        [SerializeField] List<int> mana = new List<int>();//list of ints that represent the mana each team has
         int initialManaValue = 25;
         #endregion
         #region End Game Display
@@ -78,6 +78,21 @@ namespace AztecArmy.gameManager
             HUDPanel.SetActive(false);//close the game heads up display UI
             endGameTextDisplay.text = "Team " + winningTeamID + " is victorious!";
             gameOverPanel.SetActive(true);//open end game UI
+        }
+        public void AddMana(int teamID, int value)
+        {
+            if(teamID == 1)
+            {
+                mana[0] += value;
+            }
+            else if(teamID == 2)
+            {
+                mana[1] += value;
+            }
+            else
+            {
+                Debug.LogWarning("Mana index out of range");
+            }
         }
         void Start()
         {
@@ -240,7 +255,10 @@ namespace AztecArmy.gameManager
                     if (Physics.Raycast(ray4, out hit4))
                     {
                         tempUnit4 = hit4.transform.gameObject.GetComponent<Unit>();
-                        shieldTargetDistance = Vector3.Distance(tempUnit4.unitCurrentTile.PivotPoint, selectedUnit.unitCurrentTile.PivotPoint);
+                        if (tempUnit4 != null)
+                        {
+                            shieldTargetDistance = Vector3.Distance(tempUnit4.unitCurrentTile.PivotPoint, selectedUnit.unitCurrentTile.PivotPoint);
+                        }
                     }
                     if (Input.GetMouseButtonDown(0))
                     {

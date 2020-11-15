@@ -9,17 +9,7 @@ namespace AztecArmy.Units
 {
     public class Unit : MonoBehaviour
     {
-        #region Variables
-        [Header("Game Management")]
-        public GameManager gameManager;//reference variable for the game manager
-        public GridManager gridManager;//reference variable for gthe rid manager
-        public GameObject unitWorldCanvas;//reference variables for the units world space canvas and GUI
-        public GameObject moveButton, attackButton, specialButton;
-        public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace()
-        public LineRenderer gmLineRenderer;
-        [Header("Unit Metrics")]
-        [SerializeField]
-        protected int health, basicDamage, unitType, attackManaCost, specialManaCost;
+        #region Properties
         public int BasicDamage
         {
             get { return basicDamage; }
@@ -36,8 +26,6 @@ namespace AztecArmy.Units
         {
             get { return specialManaCost; }
         }
-        [SerializeField]
-        protected bool active, moved, attacked, shielded;
         public bool Active
         {
             get { return active; }
@@ -58,8 +46,6 @@ namespace AztecArmy.Units
             get { return shielded; }
             set { shielded = value; }
         }
-        [SerializeField]
-        protected int teamID, moveRange, attackRange;
         public int TeamID
         {
             get { return teamID; }
@@ -73,6 +59,27 @@ namespace AztecArmy.Units
         {
             get { return moveRange; }
         }
+
+        #endregion
+        #region Variables
+        [Header("Game Management")]
+        public GameManager gameManager;//reference variable for the game manager
+        public GridManager gridManager;//reference variable for gthe rid manager
+        public GameObject unitWorldCanvas;//reference variables for the units world space canvas and GUI
+        public GameObject moveButton, attackButton, specialButton;
+        public Tile unitCurrentTile;//the tile the unit is currently on, is set in MoveToGridSpace()
+        public LineRenderer gmLineRenderer;
+        [Header("Unit Metrics")]
+        [SerializeField] protected int health;
+        [SerializeField] protected int basicDamage;
+        [SerializeField] protected int unitType;
+        [SerializeField] protected int attackManaCost;
+        [SerializeField] protected int specialManaCost;
+        [SerializeField] protected int manaValue;
+        [SerializeField]
+        protected bool active, moved, attacked, shielded;
+        [SerializeField]
+        protected int teamID, moveRange, attackRange;
         #endregion
         #region Status Effects
         public bool poisoned;
@@ -98,6 +105,7 @@ namespace AztecArmy.Units
                     attackRange = 3;
                     //attackManaCost = 1;
                     specialManaCost = 3;
+                    manaValue = 100;
                     break;
                 case 1://Melee Unit
                     health = 10;
@@ -106,6 +114,7 @@ namespace AztecArmy.Units
                     attackRange = 3;
                     attackManaCost = 1;
                     specialManaCost = 2;
+                    manaValue = 3;
                     break;
                 case 2://Ranged Unit
                     health = 5;
@@ -113,7 +122,8 @@ namespace AztecArmy.Units
                     moveRange = 3;
                     attackRange = 6;
                     attackManaCost = 1;
-                    specialManaCost = 4;
+                    specialManaCost = 3;
+                    manaValue = 3;
                     break;
             }
             unitType = UnitType;
@@ -148,6 +158,7 @@ namespace AztecArmy.Units
         public void UnitDeath()
         {
             gameManager.RemoveUnitFromList(this, teamID);//remove unit from unit team list on game manager
+            gameManager.AddMana(teamID, manaValue);//add mana to opposing teams mana pool
             if (unitType == 0)//if unit is base unit
             {
                 gameManager.EndGame(teamID);//game ends
