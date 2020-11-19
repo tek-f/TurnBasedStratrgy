@@ -143,7 +143,6 @@ namespace AztecArmy.gameManager
                             Unit tempUnit0 = hit0.transform.gameObject.GetComponent<Unit>();
                             if (tempUnit0 != null && tempUnit0.TeamID == currentTeam && tempUnit0.Active == true)
                             {
-                                Debug.Log(tempUnit0 + " unit clicked on");
                                 if (selectedUnit != null)
                                 {
                                     selectedUnit.OnDeSelection();
@@ -211,7 +210,6 @@ namespace AztecArmy.gameManager
                     }
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Debug.Log(attackDistance);
                         if (attackDistance > 0 && attackDistance <= selectedUnit.AttackRange)
                         {
                             tempUnit2.TakeDamage(selectedUnit.BasicDamage);
@@ -233,7 +231,6 @@ namespace AztecArmy.gameManager
                         if (currentTile != null)
                         {
                             spwanDistance = Vector3.Distance(currentTile.PivotPoint, selectedUnit.unitCurrentTile.PivotPoint);
-                            Debug.Log(spwanDistance);
                         }
                     }
                     if (Input.GetMouseButtonDown(0))
